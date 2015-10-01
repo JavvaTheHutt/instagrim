@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="uk.ac.dundee.computing.aec.instagrim.stores.*" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -17,6 +18,17 @@
         <header>
         <h1>InstaGrim ! </h1>
         <h2>Your world in Black and White</h2>
+        <%
+            Message m = (Message) session.getAttribute("Message");
+                if(m != null)
+                {
+                            if (m.getMessageStatus()) { %>
+        <p> Message: ${Message}</p>
+        <%
+            m.setMessage(null);
+            m.setMessageStatus(false);
+                            }
+                }%>
         </header>
         <nav>
             <ul>
