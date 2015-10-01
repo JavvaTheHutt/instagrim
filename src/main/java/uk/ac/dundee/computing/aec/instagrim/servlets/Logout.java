@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import uk.ac.dundee.computing.aec.instagrim.lib.CassandraHosts;
-import uk.ac.dundee.computing.aec.instagrim.stores.Message;
+import uk.ac.dundee.computing.aec.instagrim.stores.DisplayMessage;
 
 /**
  *
@@ -39,7 +39,7 @@ public class Logout extends HttpServlet {
     {      
                String message = "Logout successful";
                HttpSession session = request.getSession();
-               Message m = new Message();
+               DisplayMessage m = new DisplayMessage();
                m.setMessageStatus(true);
                m.setMessage(message);
                session.setAttribute("Message", m);

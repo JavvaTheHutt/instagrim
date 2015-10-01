@@ -9,12 +9,12 @@ package uk.ac.dundee.computing.aec.instagrim.stores;
  *
  * @author MatthewLang
  */
-public class Message {
+public class DisplayMessage {
     
     boolean messageStatus = false;
     String theMessage = null;
     
-    public void Message(){
+    public void DisplayMessage(){
         
     }
     

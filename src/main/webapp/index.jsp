@@ -16,6 +16,15 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     </head>
     <body>
+        <%
+            if(session.getAttribute("DisplayMessage")== null)
+            {
+            DisplayMessage m = new DisplayMessage();
+            m.setMessageStatus(false);
+            m.setMessage("");
+            session.setAttribute("DisplayMessage", m);
+            }
+            %>
         <header>
             <h1>InstaGrim ! </h1>
             <h2>Your world in GITHUB HELL!!!!!</h2>
