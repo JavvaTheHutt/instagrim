@@ -17,7 +17,7 @@
     <body>
         <header>
             <h1>InstaGrim ! </h1>
-            <h2>Your world in Black and White</h2>
+            <h2>Your world in GITHUB HELL!!!!!</h2>
         </header>
         <nav>
             <ul>
