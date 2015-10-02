@@ -43,7 +43,7 @@ public class User {
         rs = session.execute( // this is where the query is executed
                 boundStatement.bind( // here you are binding the 'boundStatement'
                         username));
-        if(rs == null)
+        if(rs.isExhausted())
         {
         ps = session.prepare("insert into userprofiles (login,password) Values(?,?)");
         boundStatement = new BoundStatement(ps);

@@ -16,8 +16,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import uk.ac.dundee.computing.aec.instagrim.lib.CassandraHosts;
 import uk.ac.dundee.computing.aec.instagrim.models.User;
+import uk.ac.dundee.computing.aec.instagrim.stores.LoggedIn;
 
 /**
  *
@@ -49,7 +51,7 @@ public class Register extends HttpServlet {
         String password=request.getParameter("password");
         
         
-        //makes sure that the fields are not emtpy to avoid database error
+        //makes sure that the fields are not emtpy to avoid database registering a blank user
         if(password.isEmpty() || username.isEmpty())
         {
             response.sendRedirect("register.jsp");
@@ -58,9 +60,18 @@ public class Register extends HttpServlet {
         {
         User us=new User();
         us.setCluster(cluster);
+        //sets boolean to result of register user
         boolean result = us.RegisterUser(username, password);
+        //if the result was true user was registered and directed to home page and logged in automatically
         if(result)
         {
+            HttpSession session=request.getSession();
+            LoggedIn lg= new LoggedIn();
+            lg.setLogedin();
+            lg.setUsername(username);
+            //request.setAttribute("LoggedIn", lg);
+            
+            session.setAttribute("LoggedIn", lg);
             response.sendRedirect("/Instagrim");
         }
         else
