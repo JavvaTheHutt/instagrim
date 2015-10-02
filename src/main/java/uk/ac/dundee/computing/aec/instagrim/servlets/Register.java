@@ -50,7 +50,7 @@ public class Register extends HttpServlet {
         
         
         //makes sure that the fields are not emtpy to avoid database error
-        if(password == null || username.isEmpty())
+        if(password.isEmpty() || username.isEmpty())
         {
             response.sendRedirect("register.jsp");
         }
@@ -58,9 +58,15 @@ public class Register extends HttpServlet {
         {
         User us=new User();
         us.setCluster(cluster);
-        us.RegisterUser(username, password);
-        
-	response.sendRedirect("/Instagrim");
+        boolean result = us.RegisterUser(username, password);
+        if(result)
+        {
+            response.sendRedirect("/Instagrim");
+        }
+        else
+        {
+            response.sendRedirect("register.jsp");
+        }
         }
         
     }

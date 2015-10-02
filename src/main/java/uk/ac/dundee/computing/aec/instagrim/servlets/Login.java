@@ -52,7 +52,7 @@ public class Login extends HttpServlet {
         String password=request.getParameter("password");
         
         //makes sure that the fields are not emtpy to avoid database error
-        if(password == null || username.isEmpty())
+        if(password.isEmpty() || username.isEmpty())
         {
             response.sendRedirect("login.jsp");
         }
