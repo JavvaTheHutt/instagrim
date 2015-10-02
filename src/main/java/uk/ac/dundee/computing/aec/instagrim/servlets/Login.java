@@ -51,6 +51,13 @@ public class Login extends HttpServlet {
         String username=request.getParameter("username");
         String password=request.getParameter("password");
         
+        //makes sure that the fields are not emtpy to avoid database error
+        if(password == null || username.isEmpty())
+        {
+            response.sendRedirect("login.jsp");
+        }
+        else
+        {
         User us=new User();
         us.setCluster(cluster);
         boolean isValid=us.IsValidUser(username, password);
@@ -68,6 +75,7 @@ public class Login extends HttpServlet {
 	    rd.forward(request,response);            
         }else{
             response.sendRedirect("/Instagrim/login.jsp");
+        }
         }
         
     }

@@ -37,12 +37,12 @@ public class Logout extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
     {      
-               String message = "Logout successful";
+              // String message = "Logout successful";
                HttpSession session = request.getSession();
-               DisplayMessage m = new DisplayMessage();
-               m.setMessageStatus(true);
-               m.setMessage(message);
-               session.setAttribute("Message", m);
+               //DisplayMessage m = new DisplayMessage();
+              // m.setMessageStatus(true);
+              // m.setMessage(message);
+              // session.setAttribute("Message", m);
                request.getRequestDispatcher("login.jsp").forward(request, response);
                session.invalidate();
     }
