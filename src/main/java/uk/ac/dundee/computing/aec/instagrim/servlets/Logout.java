@@ -5,7 +5,6 @@
  */
 package uk.ac.dundee.computing.aec.instagrim.servlets;
 
-import com.datastax.driver.core.Cluster;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -17,7 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import uk.ac.dundee.computing.aec.instagrim.lib.CassandraHosts;
-import uk.ac.dundee.computing.aec.instagrim.stores.DisplayMessage;
+import uk.ac.dundee.computing.aec.instagrim.stores.LoggedIn;
 
 /**
  *
@@ -26,25 +25,15 @@ import uk.ac.dundee.computing.aec.instagrim.stores.DisplayMessage;
 @WebServlet(name = "Logout", urlPatterns = {"/Logout"})
 public class Logout extends HttpServlet {
     
-    Cluster cluster = null;
-    
-    public void init(ServletConfig config) throws ServletException {
-        // TODO Auto-generated method stub
-        cluster = CassandraHosts.getCluster();
-    }
-    
-    
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
     {      
-              // String message = "Logout successful";
-               HttpSession session = request.getSession();
-               //DisplayMessage m = new DisplayMessage();
-              // m.setMessageStatus(true);
-              // m.setMessage(message);
-              // session.setAttribute("Message", m);
-               request.getRequestDispatcher("login.jsp").forward(request, response);
-               session.invalidate();
+                String message= "Logout was successful";
+                HttpSession session= request.getSession();
+                session.setAttribute("DisplayMessage", message);
+                //request.getRequestDispatcher("login.jsp").forward(request, response);
+                session.setAttribute("LoggedIn", null);
+                response.sendRedirect("login.jsp");
     }
 
     /**

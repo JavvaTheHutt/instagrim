@@ -58,21 +58,20 @@ public class Login extends HttpServlet {
         }
         else
         {
-        User us=new User();
-        us.setCluster(cluster);
-        boolean isValid=us.IsValidUser(username, password);
-        HttpSession session=request.getSession();
-        System.out.println("Session in servlet "+session);
-        if (isValid){
-            LoggedIn lg= new LoggedIn();
-            lg.setLogedin();
-            lg.setUsername(username);
-            //request.setAttribute("LoggedIn", lg);
-            
-            session.setAttribute("LoggedIn", lg);
+            User us=new User();
+            us.setCluster(cluster);
+            boolean isValid=us.IsValidUser(username, password);
+            HttpSession session=request.getSession();
             System.out.println("Session in servlet "+session);
-            RequestDispatcher rd=request.getRequestDispatcher("index.jsp");
-	    rd.forward(request,response);            
+            if (isValid){
+                LoggedIn lg= new LoggedIn();
+                lg.setLogedin();
+                lg.setUsername(username);
+                //request.setAttribute("LoggedIn", lg);
+
+                session.setAttribute("LoggedIn", lg);
+                System.out.println("Session in servlet "+session);
+                response.sendRedirect("index.jsp");
         }else{
             response.sendRedirect("/Instagrim/login.jsp");
         }

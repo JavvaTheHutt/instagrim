@@ -58,26 +58,24 @@ public class Register extends HttpServlet {
         }
         else
         {
-        User us=new User();
-        us.setCluster(cluster);
-        //sets boolean to result of register user
-        boolean result = us.RegisterUser(username, password);
-        //if the result was true user was registered and directed to home page and logged in automatically
-        if(result)
-        {
-            HttpSession session=request.getSession();
-            LoggedIn lg= new LoggedIn();
-            lg.setLogedin();
-            lg.setUsername(username);
-            //request.setAttribute("LoggedIn", lg);
-            
-            session.setAttribute("LoggedIn", lg);
-            response.sendRedirect("/Instagrim");
-        }
-        else
-        {
-            response.sendRedirect("register.jsp");
-        }
+            User us= new User();
+            us.setCluster(cluster);
+            //sets boolean to result of register user
+            boolean result= us.RegisterUser(username, password);
+            //if the result was true user was registered and directed to home page and logged in automatically
+            if(result)
+            {
+                HttpSession session=request.getSession();
+                LoggedIn lg= new LoggedIn();
+                lg.setLogedin();
+                lg.setUsername(username);
+                //request.setAttribute("LoggedIn", lg);
+
+                session.setAttribute("LoggedIn", lg);
+                response.sendRedirect("/Instagrim");
+            }else{
+                response.sendRedirect("register.jsp");
+            }
         }
         
     }

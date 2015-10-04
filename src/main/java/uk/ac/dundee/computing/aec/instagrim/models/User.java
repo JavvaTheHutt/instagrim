@@ -45,16 +45,14 @@ public class User {
                         username));
         if(rs.isExhausted())
         {
-        ps = session.prepare("insert into userprofiles (login,password) Values(?,?)");
-        boundStatement = new BoundStatement(ps);
-        session.execute( // this is where the query is executed
-                boundStatement.bind( // here you are binding the 'boundStatement'
-                        username,EncodedPassword));
-        //We are assuming this always works.  Also a transaction would be good here !
-        return true;
-        }
-        else
-        {
+            ps = session.prepare("insert into userprofiles (login,password) Values(?,?)");
+            boundStatement = new BoundStatement(ps);
+            session.execute( // this is where the query is executed
+                    boundStatement.bind( // here you are binding the 'boundStatement'
+                            username,EncodedPassword));
+            //We are assuming this always works.  Also a transaction would be good here !
+            return true;
+        }else{
             System.out.println("Username has already been taken");
             return false;
         }
@@ -77,7 +75,7 @@ public class User {
                 boundStatement.bind( // here you are binding the 'boundStatement'
                         username));
         if (rs.isExhausted()) {
-            System.out.println("No Images returned");
+            System.out.println("That username does not exisit");
             return false;
         } else {
             for (Row row : rs) {

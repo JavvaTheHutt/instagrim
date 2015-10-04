@@ -19,15 +19,12 @@
         <h1>InstaGrim ! </h1>
         <h2>Your world in Black and White</h2>
         <%
-            DisplayMessage m = (DisplayMessage) session.getAttribute("DisplayMessage");
-                if(m != null)
+                if(null != session.getAttribute("DisplayMessage"))
                 {
-                            if (m.getMessageStatus()){ %>
+                    %>
         <p> Message: ${DisplayMessage}</p>
         <%
-            m.setMessage(null);
-            m.setMessageStatus(false);
-                            }
+                    session.setAttribute("DisplayMessage", null);
                 }%>
         </header>
         <nav>
