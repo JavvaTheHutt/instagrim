@@ -1,3 +1,8 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,600,700,300,800);
+@import url(https://fonts.googleapis.com/css?family=Grand+Hotel);
+@import url(https://fonts.googleapis.com/css?family=Fjalla+One);
+@import url(https://fonts.googleapis.com/css?family=Titillium+Web);
+
 /*
 To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
@@ -7,47 +12,79 @@ and open the template in the editor.
     Created on : 05-Oct-2015, 21:07:55
     Author     : MatthewLang
 */
-
-.body{
-    height:100vh;
-    background-color: black;
+html,
+body{
+    height:100%;
+    width: 100%;
+    font-family: 'Titillium Web', sans-serif;
 }
 
 #header
 {
-    height:40vh;
-    margin-bottom:0px;
+    height:92%;
     background-image: url('../../images/Jumbo.jpg');
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: 100% 100%;
+    margin-bottom: 0;
 }
 
 #WelcomeText
 {
+    font-family: 'Grand Hotel', cursive;
     text-align: center; 
-    color: #FFFFFF;
+    color: lightgray;
     margin: auto;
 }
 
 #TaglineText
 {
+    font-family: 'Fjalla One', sans-serif;
     text-align: center; 
-    color: #FFFFFF;
+    color: lightgray;
     margin: auto;
-}
-
-#SignUpButton
-{
-    margin-left: 1vh;
-}
-
-#text
-{
-    margin-top: 20vh;
 }
 
 #navbar
 {
+   padding-top: 0;
    border-radius: 0px;
+   min-height: 8%;
+   margin-left: auto;
+   margin-right: auto;
+   font-family: 'Titillium Web', sans-serif;
 }
 
+#rightnav
+{
+    margin-right: 5%;
+}
+
+#brand
+{
+    font-family: 'Grand Hotel', cursive;
+    margin-left: 7%;
+    vertical-align: middle;
+    margin-top: 5%;
+}
+
+#navHead
+{
+    min-height: 8vh;
+}
+
+#Footer
+{
+   height: 5%;
+   border: 0;
+}
+
+#jumbotronContainer
+{
+    text-align: center;
+}
+
+#animBtn
+{
+    animation-delay: 2s;
+    animation-duration: 2s;
+}
