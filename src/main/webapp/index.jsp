@@ -38,7 +38,7 @@
             </div>
         </div>
         
-                <nav class="navbar navbar-inverse" data-spy="affix" data-offset="311">
+                <nav id="navbar" class="navbar navbar-inverse" data-spy="affix" data-offset="311">
                     <div class="container-fluid">
                       <!-- Brand and toggle get grouped for better mobile display -->
                       <div class="navbar-header">
@@ -144,7 +144,7 @@ Vestibulum nibh augue, blandit sit amet orci aliquam, dictum iaculis nisi. Quisq
 Quisque consectetur tempor nisl sit amet feugiat. Donec pulvinar elit felis, quis faucibus neque vehicula eu. Curabitur vitae velit id nibh porttitor fermentum accumsan id erat. Duis semper laoreet mi blandit aliquet. Suspendisse laoreet sem ut neque tincidunt egestas. Praesent eget porttitor nunc. Praesent et eros id est interdum vulputate. Nam rutrum sagittis augue, at fringilla elit tempor in. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed condimentum quis dolor non suscipit. Praesent in ante sit amet ante vestibulum blandit sed eget quam. Maecenas interdum pharetra tincidunt. Praesent mauris metus, condimentum non nisi vitae, vehicula maximus arcu. Curabitur tincidunt tortor nec dolor viverra sagittis. Vivamus velit erat, auctor ac leo in, mollis congue felis. Donec quis tempus tortor, at suscipit odio.
                     </p>
                 </div>
-            <div class="nav navbar-default">
+            <div class="navbar navbar-default navbar-fixed-bottom" >
                 <ul>
                     <li>&COPY; Andy C</li>
                 </ul>

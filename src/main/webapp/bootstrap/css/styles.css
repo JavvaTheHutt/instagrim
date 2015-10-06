@@ -46,3 +46,8 @@ and open the template in the editor.
     margin-top: 20vh;
 }
 
+#navbar
+{
+   border-radius: 0px;
+}
+
