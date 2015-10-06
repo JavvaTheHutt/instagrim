@@ -71,7 +71,7 @@ public class Login extends HttpServlet {
 
                 session.setAttribute("LoggedIn", lg);
                 System.out.println("Session in servlet "+session);
-                response.sendRedirect("index.jsp");
+                response.sendRedirect("/Instagrim");
         }else{
             response.sendRedirect("/Instagrim/login.jsp");
         }
