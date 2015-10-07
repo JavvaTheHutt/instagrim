@@ -49,10 +49,13 @@ public class Register extends HttpServlet {
             throws ServletException, IOException {
         String username=request.getParameter("username");
         String password=request.getParameter("password");
+        String firstname=request.getParameter("firstname");
+        String lastname=request.getParameter("lastname");
+        String email=request.getParameter("email");
         
         
         //makes sure that the fields are not emtpy to avoid database registering a blank user
-        if(password.isEmpty() || username.isEmpty())
+        if(password.isEmpty() || username.isEmpty() || firstname.isEmpty() || lastname.isEmpty() || email.isEmpty())
         {
             response.sendRedirect("register.jsp");
         }
@@ -61,9 +64,9 @@ public class Register extends HttpServlet {
             User us= new User();
             us.setCluster(cluster);
             //sets boolean to result of register user
-            boolean result= us.RegisterUser(username, password);
+            String result= us.RegisterUser(username, password, firstname, lastname, email);
             //if the result was true user was registered and directed to home page and logged in automatically
-            if(result)
+            if(result.equals("Success"))
             {
                 HttpSession session=request.getSession();
                 LoggedIn lg= new LoggedIn();

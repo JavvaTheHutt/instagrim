@@ -82,11 +82,12 @@
                             <h2 id='TaglineText'>
                                 Where Pictures Come to Die.
                             </h2>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <button id="animBtn" type="button" class="btn btn-transparent wow slideInLeft">Sign Up</button>
+                        <%
+                              if(lg == null)
+                              {
+                              %>
+                        <a href="register.jsp"><button id="animBtn" type="button" class="btn btn-transparent wow slideInLeft">Sign Up</button></a>
+                        <%}%>
                     </div>
                 </div>
     </body>

@@ -33,7 +33,7 @@ public class Logout extends HttpServlet {
                 session.setAttribute("DisplayMessage", message);
                 //request.getRequestDispatcher("login.jsp").forward(request, response);
                 session.setAttribute("LoggedIn", null);
-                response.sendRedirect("login.jsp");
+                response.sendRedirect("/Instagrim");
     }
 
     /**
