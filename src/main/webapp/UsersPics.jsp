@@ -12,16 +12,21 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Instagrim</title>
-        <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css"/>
-        <link rel="stylesheet" href="bootstrap/css/styles.css"/>
+        <link rel="stylesheet" href="/Instagrim/bootstrap/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="/Instagrim/bootstrap/css/styles.css"/>
+        <link href="/Instagrim/bootstrap/css/font-awesome.min.css" rel="stylesheet">
+        <link href="/Instagrim/bootstrap/css/animate.min.css" rel="stylesheet">
+        <link href="/Instagrim/bootstrap/css/prettyPhoto.css" rel="stylesheet">
+        <link href="/Instagrim/bootstrap/css/main.css" rel="stylesheet">
+        <link href="/Instagrim/bootstrap/css/responsive.css" rel="stylesheet">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="/Instagrim/bootstrap/js/bootstrap.min.js"></script>
+        <script src="/Instagrim/bootstrap/js/jquery.prettyPhoto.js"></script>
+        <script src="/Instagrim/bootstrap/js/jquery.isotope.min.js"></script>
+        <script src="/Instagrim/bootstrap/js/main.js"></script>
+        <script src="/Instagrim/bootstrap/js/wow.min.js"></script>
     </head>
-    <body>
-        <header>
-        
-        <h1>InstaGrim ! </h1>
-        <h2>Your world in Black and White</h2>
-        </header>
-        
+    <body>        
         <div id="navbar" class="navbar navbar-inverse navbar-static-top">
                     <div class="container">
                       <!-- Brand and toggle get grouped for better mobile display -->
@@ -39,15 +44,16 @@
 
                       <!-- Collect the nav links, forms, and other content for toggling -->
                       <div class="collapse navbar-collapse">
-            <ul>
-                <li class="nav"><a href="/Instagrim/upload.jsp">Upload</a></li>
-                <li class="nav"><a href="/Instagrim/Images/majed">Sample Images</a></li>
+            <ul class="nav navbar-nav">
+                <li><a href="/Instagrim/upload.jsp">Upload</a></li>
+                <li><a href="/Instagrim/Images/majed">Sample Images</a></li>
             </ul>
         </div>
                     </div>
         </div>
  
-        <article>
+        <article id="gallery" class="gallery">
+            <div class="container">
             <h1>Your Pics</h1>
         <%
             java.util.LinkedList<Pic> lsPics = (java.util.LinkedList<Pic>) request.getAttribute("Pics");
@@ -67,11 +73,7 @@
             }
             }
         %>
+            </div>
         </article>
-        <footer>
-            <ul>
-                <li class="footer"><a href="/Instagrim">Home</a></li>
-            </ul>
-        </footer>
     </body>
 </html>

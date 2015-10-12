@@ -9,6 +9,8 @@ package uk.ac.dundee.computing.aec.instagrim.servlets;
 import com.datastax.driver.core.Cluster;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -20,6 +22,7 @@ import javax.servlet.http.HttpSession;
 import uk.ac.dundee.computing.aec.instagrim.lib.CassandraHosts;
 import uk.ac.dundee.computing.aec.instagrim.models.User;
 import uk.ac.dundee.computing.aec.instagrim.stores.LoggedIn;
+import uk.ac.dundee.computing.aec.instagrim.stores.ProfileBean;
 
 /**
  *
@@ -70,6 +73,13 @@ public class Login extends HttpServlet {
                 //request.setAttribute("LoggedIn", lg);
 
                 session.setAttribute("LoggedIn", lg);
+                ProfileBean profile = new ProfileBean();
+                try {
+                    profile = us.getProfile(profile ,username);
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+                session.setAttribute("ProfileBean", profile);
                 System.out.println("Session in servlet "+session);
                 response.sendRedirect("/Instagrim");
         }else{

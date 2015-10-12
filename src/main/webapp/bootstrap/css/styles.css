@@ -58,6 +58,10 @@ body{
 {
     margin-right: 5%;
 }
+#leftnav
+{
+    margin-left: 5%;
+}
 
 #brand
 {
@@ -88,4 +92,9 @@ body{
     animation-delay: 2s;
     animation-duration: 2s;
     margin-top: 15%;
+}
+
+#gallery
+{
+    height: 92%;
 }

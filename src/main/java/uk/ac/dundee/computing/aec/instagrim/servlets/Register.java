@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import uk.ac.dundee.computing.aec.instagrim.lib.CassandraHosts;
 import uk.ac.dundee.computing.aec.instagrim.models.User;
-import uk.ac.dundee.computing.aec.instagrim.stores.LoggedIn;
+import uk.ac.dundee.computing.aec.instagrim.stores.*;
 
 /**
  *
@@ -33,7 +33,12 @@ public class Register extends HttpServlet {
         cluster = CassandraHosts.getCluster();
     }
 
-
+    @Override
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+    {
+        RequestDispatcher rd = request.getRequestDispatcher("register.jsp");
+        rd.forward(request, response);
+    }
 
 
     /**
@@ -52,10 +57,18 @@ public class Register extends HttpServlet {
         String firstname=request.getParameter("firstname");
         String lastname=request.getParameter("lastname");
         String email=request.getParameter("email");
+        String street=request.getParameter("street");
+        String city=request.getParameter("city");
+        int postcode=Integer.parseInt(request.getParameter("postcode"));
         
+        ProfileBean profile = new ProfileBean();
+        profile.setFirstName(firstname);
+        profile.setLastName(lastname);
+        profile.setEmail(email);
+        profile.setAddress(street, city, postcode);
         
         //makes sure that the fields are not emtpy to avoid database registering a blank user
-        if(password.isEmpty() || username.isEmpty() || firstname.isEmpty() || lastname.isEmpty() || email.isEmpty())
+        if(password.isEmpty() || username.isEmpty() || firstname.isEmpty() || lastname.isEmpty() || email.isEmpty() || street.isEmpty() || city.isEmpty())
         {
             response.sendRedirect("register.jsp");
         }
@@ -64,7 +77,7 @@ public class Register extends HttpServlet {
             User us= new User();
             us.setCluster(cluster);
             //sets boolean to result of register user
-            String result= us.RegisterUser(username, password, firstname, lastname, email);
+            String result= us.RegisterUser(username, password, profile);
             //if the result was true user was registered and directed to home page and logged in automatically
             if(result.equals("Success"))
             {

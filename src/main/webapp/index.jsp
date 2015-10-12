@@ -12,19 +12,19 @@
 <html>
     <head>
         <title>Instagrim</title>
-        <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css"/>
-        <link rel="stylesheet" href="bootstrap/css/styles.css"/>
-        <link href="bootstrap/css/font-awesome.min.css" rel="stylesheet">
-        <link href="bootstrap/css/animate.min.css" rel="stylesheet">
-        <link href="bootstrap/css/prettyPhoto.css" rel="stylesheet">
-        <link href="bootstrap/css/main.css" rel="stylesheet">
-        <link href="bootstrap/css/responsive.css" rel="stylesheet">
+        <link rel="stylesheet" href="/Instagrim/bootstrap/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="/Instagrim/bootstrap/css/styles.css"/>
+        <link href="/Instagrim/bootstrap/css/font-awesome.min.css" rel="stylesheet">
+        <link href="/Instagrim/bootstrap/css/animate.min.css" rel="stylesheet">
+        <link href="/Instagrim/bootstrap/css/prettyPhoto.css" rel="stylesheet">
+        <link href="/Instagrim/bootstrap/css/main.css" rel="stylesheet">
+        <link href="/Instagrim/bootstrap/css/responsive.css" rel="stylesheet">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-        <script src="bootstrap/js/bootstrap.min.js"></script>
-        <script src="bootstrap/js/jquery.prettyPhoto.js"></script>
-        <script src="bootstrap/js/jquery.isotope.min.js"></script>
-        <script src="bootstrap/js/main.js"></script>
-        <script src="bootstrap/js/wow.min.js"></script>
+        <script src="/Instagrim/bootstrap/js/bootstrap.min.js"></script>
+        <script src="/Instagrim/bootstrap/js/jquery.prettyPhoto.js"></script>
+        <script src="/Instagrim/bootstrap/js/jquery.isotope.min.js"></script>
+        <script src="/Instagrim/bootstrap/js/main.js"></script>
+        <script src="/Instagrim/bootstrap/js/wow.min.js"></script>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     </head>
     <body>        
@@ -54,7 +54,7 @@
                                   {
                               %>
                               <ul class="nav navbar-nav">
-                                <li><a href="upload.jsp">Upload</a></li>
+                                <li><a href="/Instagrim/upload.jsp">Upload</a></li>
                                 <li><a href="/Instagrim/Images/<%=UserName%>">Your Images</a></li>
                                 <li><a href="/Instagrim/Profile/<%=UserName%>">Profile</a></li>
                               </ul>
@@ -65,7 +65,7 @@
                               }else{
                               %>
                                 <ul id="rightnav" class="nav navbar-nav navbar-right">
-                                    <li><a href="register.jsp"><span class="glyphicon glyphicon-user"></span> SignUp</a></li>
+                                    <li><a href="/Instagrim/Register"><span class="glyphicon glyphicon-user"></span> SignUp</a></li>
                                     <li><a href="login.jsp"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
                                 </ul>
                               <%

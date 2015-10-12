@@ -34,6 +34,9 @@
                     <li>First Name <input type="text" name="firstname"></li>
                     <li>Last Name <input type="text" name="lastname"></li>
                     <li>Email <input type="email" name="email"></li>
+                    <li>Street <input type="text" name="street"></li>
+                    <li>City <input type="text" name="city"></li>
+                    <li>PostCode <input type="number" name="postcode"></li>
                 </ul>
                 <br/>
                 <input type="submit" value="Register"> 
