@@ -12,7 +12,8 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Instagrim</title>
-        <link rel="stylesheet" type="text/css" href="/Instagrim/Styles.css" />
+        <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="bootstrap/css/styles.css"/>
     </head>
     <body>
         <header>
@@ -21,12 +22,30 @@
         <h2>Your world in Black and White</h2>
         </header>
         
-        <nav>
+        <div id="navbar" class="navbar navbar-inverse navbar-static-top">
+                    <div class="container">
+                      <!-- Brand and toggle get grouped for better mobile display -->
+                      <div id="navHead" class="navbar-header">
+                        <a id="brand" class="navbar-brand" href="/Instagrim/">Instagrim</a>
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                          <span class="sr-only">Toggle navigation</span>
+                          <span class="icon-bar"></span>
+                          <span class="icon-bar"></span>
+                          <span class="icon-bar"></span>
+                        </button>
+                          
+                      </div>
+                            
+
+                      <!-- Collect the nav links, forms, and other content for toggling -->
+                      <div class="collapse navbar-collapse">
             <ul>
                 <li class="nav"><a href="/Instagrim/upload.jsp">Upload</a></li>
                 <li class="nav"><a href="/Instagrim/Images/majed">Sample Images</a></li>
             </ul>
-        </nav>
+        </div>
+                    </div>
+        </div>
  
         <article>
             <h1>Your Pics</h1>

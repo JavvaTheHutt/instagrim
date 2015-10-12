@@ -68,14 +68,8 @@ public class Register extends HttpServlet {
             //if the result was true user was registered and directed to home page and logged in automatically
             if(result.equals("Success"))
             {
-                HttpSession session=request.getSession();
-                LoggedIn lg= new LoggedIn();
-                lg.setLogedin();
-                lg.setUsername(username);
-                //request.setAttribute("LoggedIn", lg);
-
-                session.setAttribute("LoggedIn", lg);
-                response.sendRedirect("/Instagrim");
+                RequestDispatcher rd = request.getRequestDispatcher("/Login");
+                rd.forward(request, response); 
             }else{
                 response.sendRedirect("register.jsp");
             }

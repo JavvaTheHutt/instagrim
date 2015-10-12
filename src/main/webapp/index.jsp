@@ -56,6 +56,7 @@
                               <ul class="nav navbar-nav">
                                 <li><a href="upload.jsp">Upload</a></li>
                                 <li><a href="/Instagrim/Images/<%=UserName%>">Your Images</a></li>
+                                <li><a href="/Instagrim/Profile/<%=UserName%>">Profile</a></li>
                               </ul>
                               <ul id="rightnav" class="nav navbar-nav navbar-right">
                                 <li><a href="/Instagrim/Logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
