@@ -18,6 +18,7 @@ import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 import javax.servlet.http.HttpSession;
 import uk.ac.dundee.computing.aec.instagrim.lib.AeSimpleSHA1;
@@ -142,9 +143,7 @@ public class User {
             profile.setFirstName(row.getString("first_name"));
             profile.setLastName(row.getString("last_name"));
             profile.setEmail(row.getString("email"));
-            UDTValue address = row.getUDTValue("addresses");
-            profile.setAddress(address.getString("street"), address.getString("city"), address.getInt("zip"));
-        }
+       }
        }
        catch(Exception e)
        {

@@ -98,3 +98,13 @@ body{
 {
     height: 92%;
 }
+
+#profileContent
+{
+    margin-top: 5%;
+}
+
+#profileBox
+{
+    background-color: #f7f7f7;
+}

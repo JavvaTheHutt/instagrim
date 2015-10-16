@@ -12,6 +12,7 @@ public class ProfileBean {
     private String street= null;
     private String city= null;
     private int postCode= 0;
+    private Pic avatar= null;
     
     public void ProfileBean(){
         
@@ -37,6 +38,11 @@ public class ProfileBean {
         this.street= street;
         this.city= city;
         this.postCode= postCode;
+    }
+    
+    public void setAvatar(Pic avatar)
+    {
+        this.avatar=avatar;
     }
     
     public String getFirstName()
@@ -73,6 +79,11 @@ public class ProfileBean {
     public int getPostCode()
     {
         return postCode;
+    }
+    
+    public Pic getAvatar()
+    {
+        return avatar;
     }
         
 }

@@ -48,7 +48,7 @@
 
                       <!-- Collect the nav links, forms, and other content for toggling -->
                       <div class="collapse navbar-collapse">
-                              <ul id="leftnav" class="nav navbar-nav">
+                              <ul class="nav navbar-nav">
                                 <li><a href="/Instagrim/upload.jsp">Upload</a></li>
                                 <li><a href="/Instagrim/Images/<%=lg.getUsername()%>">Your Images</a></li>
                                 <li class="active"><a href="/Instagrim/Profile/<%=lg.getUsername()%>">Profile</a></li>
@@ -59,10 +59,21 @@
                       </div><!-- /.navbar-collapse -->
                     </div><!-- /.container-fluid -->
                   </div>
-            <div>
-                <p><%=profile.getFirstName() + " " + profile.getLastName()%></p>
-                <p><%=lg.getUsername()%></p>
-                <p><%=profile.getEmail()%></p>
-            </div>
+                <div id="profileContent" class="row">
+                    <div class="col-md-3">
+                    </div>
+                    <div id="profileBox" class="container">
+                        <div class="col-md-3">
+                            <p><%=profile.getFirstName() + " " + profile.getLastName()%></p>
+                            <p><%=lg.getUsername()%></p>
+                            <p><%=profile.getEmail()%></p>
+                            <p><%=profile.getAddress()%></p>
+                        </div>
+                        <div class="col-md-3">
+                        </div>
+                        </div>
+                    <div class="col-md-3">
+                    </div>
+                </div>
     </body>
 </html>
