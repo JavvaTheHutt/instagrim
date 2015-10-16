@@ -64,10 +64,20 @@
                     </div>
                     <div id="profileBox" class="container">
                         <div class="col-md-3">
+                            <% if(profile.getAvatar() != null)
+                                { %>
+                                <ul>
+                                    <li id="avatar"><a href="/Instagrim/Image/<%=profile.getAvatar().getSUUID()%>"><img class="img-circle" src="/Instagrim/Thumb/<%=profile.getAvatar().getSUUID()%> "></a></li><br/>
+                            <%}else{%>
+                                <ul>
+                                    <li id="avatar"><img class="img-circle" src="/Instagrim/images/Vendetta.jpg"><a id="uploadText" href="/Instagrim/upload.jsp">Change Avatar</a></a></li><br/>
+                            <%}%>
+                            
                             <p><%=profile.getFirstName() + " " + profile.getLastName()%></p>
                             <p><%=lg.getUsername()%></p>
                             <p><%=profile.getEmail()%></p>
                             <p><%=profile.getAddress()%></p>
+                                </ul>
                         </div>
                         <div class="col-md-3">
                         </div>

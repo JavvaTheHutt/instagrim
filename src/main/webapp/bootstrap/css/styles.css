@@ -107,4 +107,20 @@ body{
 #profileBox
 {
     background-color: #f7f7f7;
+    padding: 1%;
+}
+
+#avatar
+{
+    list-style: none;
+}
+
+#uploadText
+{
+    visibility: hidden;
+}
+
+#avatar:hover  #uploadText
+{
+            visibility: visible;
 }
