@@ -21,6 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import uk.ac.dundee.computing.aec.instagrim.lib.CassandraHosts;
 import uk.ac.dundee.computing.aec.instagrim.models.User;
+import uk.ac.dundee.computing.aec.instagrim.stores.Avatar;
 import uk.ac.dundee.computing.aec.instagrim.stores.LoggedIn;
 import uk.ac.dundee.computing.aec.instagrim.stores.ProfileBean;
 
@@ -74,12 +75,14 @@ public class Login extends HttpServlet {
 
                 session.setAttribute("LoggedIn", lg);
                 ProfileBean profile = new ProfileBean();
+                Avatar av = new Avatar();
                 try {
-                    profile = us.getProfile(profile ,username);
+                    profile = us.getProfile(profile ,username, av);
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }
                 session.setAttribute("ProfileBean", profile);
+                session.setAttribute("Avatar", profile.getAvatar());
                 System.out.println("Session in servlet "+session);
                 response.sendRedirect("/Instagrim");
         }else{

@@ -12,7 +12,7 @@ public class ProfileBean {
     private String street= null;
     private String city= null;
     private int postCode= 0;
-    private Pic avatar= null;
+    private Avatar avatar= null;
     
     public void ProfileBean(){
         
@@ -40,7 +40,7 @@ public class ProfileBean {
         this.postCode= postCode;
     }
     
-    public void setAvatar(Pic avatar)
+    public void setAvatar(Avatar avatar)
     {
         this.avatar=avatar;
     }
@@ -81,7 +81,7 @@ public class ProfileBean {
         return postCode;
     }
     
-    public Pic getAvatar()
+    public Avatar getAvatar()
     {
         return avatar;
     }

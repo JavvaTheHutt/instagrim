@@ -22,6 +22,7 @@ import java.util.Map;
 import java.util.Set;
 import javax.servlet.http.HttpSession;
 import uk.ac.dundee.computing.aec.instagrim.lib.AeSimpleSHA1;
+import uk.ac.dundee.computing.aec.instagrim.stores.Avatar;
 import uk.ac.dundee.computing.aec.instagrim.stores.Pic;
 import uk.ac.dundee.computing.aec.instagrim.stores.ProfileBean;
 
@@ -131,18 +132,36 @@ public class User {
         return false;
     }
         
-    public ProfileBean getProfile(ProfileBean profile, String user) throws Exception
+    public ProfileBean getProfile(ProfileBean profile, String user, Avatar av) throws Exception
     {
        try{
         Session session = cluster.connect("instagrim");
         PreparedStatement ps = session.prepare("select * from userprofiles where login=?");
         ResultSet rs = null;
+        ResultSet rs1 = null;
         BoundStatement bs = new BoundStatement(ps);
         rs = session.execute(bs.bind(user));
+        ps = session.prepare("select image,imagelength,type from pics where picid =?");
+        bs = new BoundStatement(ps);
         for(Row row : rs){
+            if(row.getUUID("avatar")!= null)
+            {
+            rs1 = session.execute(bs.bind(row.getUUID("avatar")));
+            }
             profile.setFirstName(row.getString("first_name"));
             profile.setLastName(row.getString("last_name"));
             profile.setEmail(row.getString("email"));
+            if(rs1.isExhausted())
+            {}
+            else
+            {
+            for(Row row1 : rs1)
+            {
+                av.setPic(row1.getBytes("image"), row1.getInt("imageLength"), row1.getString("type"));
+                av.setUUID(row.getUUID("avatar"));
+                profile.setAvatar(av);
+            }
+            }
        }
        }
        catch(Exception e)

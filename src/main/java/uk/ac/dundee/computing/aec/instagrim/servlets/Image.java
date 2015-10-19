@@ -25,8 +25,10 @@ import org.apache.commons.fileupload.util.Streams;
 import uk.ac.dundee.computing.aec.instagrim.lib.CassandraHosts;
 import uk.ac.dundee.computing.aec.instagrim.lib.Convertors;
 import uk.ac.dundee.computing.aec.instagrim.models.PicModel;
+import uk.ac.dundee.computing.aec.instagrim.stores.Avatar;
 import uk.ac.dundee.computing.aec.instagrim.stores.LoggedIn;
 import uk.ac.dundee.computing.aec.instagrim.stores.Pic;
+import uk.ac.dundee.computing.aec.instagrim.stores.ProfileBean;
 
 /**
  * Servlet implementation class Image
@@ -126,6 +128,9 @@ public class Image extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        boolean profilePage = false;
+        HttpSession session=request.getSession();
+        LoggedIn lg= (LoggedIn)session.getAttribute("LoggedIn");
         for (Part part : request.getParts()) {
             System.out.println("Part Name " + part.getName());
 
@@ -134,8 +139,6 @@ public class Image extends HttpServlet {
             
             InputStream is = request.getPart(part.getName()).getInputStream();
             int i = is.available();
-            HttpSession session=request.getSession();
-            LoggedIn lg= (LoggedIn)session.getAttribute("LoggedIn");
             String username="majed";
             if (lg.getlogedin()){
                 username=lg.getUsername();
@@ -146,13 +149,39 @@ public class Image extends HttpServlet {
                 System.out.println("Length : " + b.length);
                 PicModel tm = new PicModel();
                 tm.setCluster(cluster);
-                tm.insertPic(b, type, filename, username);
+                if(session.getAttribute("uploadProfile") == null)
+                {
+                    tm.insertPic(b, type, filename, username);
+                    profilePage =false;
+                }
+                else
+                {
+                    Avatar av = new Avatar();
+                    av= tm.insertProfilePic(b, type, type, username, av);
+                    session.setAttribute("Avatar", av);
+                    ProfileBean pb = (ProfileBean) session.getAttribute("ProfileBean");
+                    pb.setAvatar(av);
+                    session.setAttribute("uploadProfile", null);
+                    session.setAttribute("ProfileBean", pb);
+                    profilePage =true;
+                }
 
                 is.close();
             }
-            RequestDispatcher rd = request.getRequestDispatcher("/upload.jsp");
-             rd.forward(request, response);
         }
+            if(profilePage==false)
+            {
+//            RequestDispatcher rd = request.getRequestDispatcher("/Images/" + lg.getUsername());
+//            rd.forward(request, response);
+            response.sendRedirect("/Instagrim/Images/" + lg.getUsername());
+            }
+            else
+            {
+//            RequestDispatcher rd = request.getRequestDispatcher("/Profile/" + lg.getUsername());
+//            rd.forward(request, response);
+              response.sendRedirect("/Instagrim/Profile/" + lg.getUsername());
+            }
+        
 
     }
 

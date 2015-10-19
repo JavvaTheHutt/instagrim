@@ -18,7 +18,7 @@ public class Avatar {
     private String type;
     private java.util.UUID UUID=null;
     
-    public void Pic() {
+    public void Avatar() {
 
     }
     public void setUUID(java.util.UUID UUID){

@@ -65,33 +65,40 @@
                       </div><!-- /.navbar-collapse -->
                     </div><!-- /.container-fluid -->
                   </div>
-                              
-                <div class="container">              
                 <div id="profileContent" class="row">
-                    <div class="col-md-3"></div>
                     <div id="profileBox" class="container">
-                        <div class="col-md-3">
-                            <% if(profile.getAvatar() != null)
-                                { System.out.println("This means avatar is not null");%>
-                                <ul>
-                                    <li id="avatar"><a href="/Instagrim/Image/<%=profile.getAvatar().getSUUID()%>"><img id="avatarImg" class="img-circle" src="/Instagrim/Thumb/<%=profile.getAvatar().getSUUID()%> "></a><br/><a id="uploadText" href="/Instagrim/upload.jsp" onclick="sessionUploadSet()">Change Avatar</a></li><br/>
-                            <% }else{ 
-                            %>
-                                <ul>
-                                    <li id="avatar"><img id="avatarImg" class="img-circle" src="/Instagrim/images/Vendetta.jpg"><br/><a id="uploadText" href="/Instagrim/upload.jsp" onclick="sessionUploadSet()">Change Avatar</a></li>
-                                    
-                            <%}%>
-                            
-                            <p><%=profile.getFirstName() + " " + profile.getLastName()%></p>
-                            <p><%=lg.getUsername()%></p>
-                            <p><%=profile.getEmail()%></p>
-                            <p><%=profile.getAddress()%></p>
-                                </ul>
-                        </div>
-                        <div class="col-md-3"></div>
+                        <div  class="col-md-4 col-md-offset-4">
+                            <h2 class="h2">Update Profile</h2>
+                            <br/>
+                            <form class="form-horizontal" method="POST" action="Profile" role="form">
+                                <div class="form-group">
+                                    <label>First Name:</label>
+                                    <input class="form-control" type="text" name="firstname" value="<%=profile.getFirstName()%>">
+                                </div>
+                                <div class="form-group">
+                                    <label>Last Name:</label>
+                                    <input class="form-control" type="text" name="lastname" value="<%=profile.getLastName()%>">
+                                </div>
+                                <div class="form-group">
+                                    <label>Email:</label>
+                                    <input class="form-control" type="email" name="email" value="<%=profile.getEmail()%>">
+                                </div>
+                                <div class="form-group">
+                                    <label>Street:</label>
+                                    <input class="form-control" type="text" name="street" value="<%=profile.getStreet()%>">
+                                </div>
+                                <div class="form-group">
+                                    <label>City:</label>
+                                    <input class="form-control" type="text" name="city" value="<%=profile.getCity()%>">
+                                </div>
+                                <div class="form-group">
+                                    <label>PostCode:</label>
+                                    <input class="form-control" type="number" name="postcode" value="<%=profile.getPostCode()%>">
+                                </div>
+                                    <button  type="submit" class="btn btn-primary">Update Profile</button>
+                             </form>
+                        </div>                  
                     </div>
-                    <div class="col-md-3"></div>
-               </div>
-               </div>
+                </div>
     </body>
 </html>

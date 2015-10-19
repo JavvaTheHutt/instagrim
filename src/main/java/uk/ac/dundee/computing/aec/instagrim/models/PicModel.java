@@ -35,6 +35,7 @@ import static org.imgscalr.Scalr.*;
 import org.imgscalr.Scalr.Method;
 
 import uk.ac.dundee.computing.aec.instagrim.lib.*;
+import uk.ac.dundee.computing.aec.instagrim.stores.Avatar;
 import uk.ac.dundee.computing.aec.instagrim.stores.Pic;
 //import uk.ac.dundee.computing.aec.stores.TweetStore;
 
@@ -64,10 +65,10 @@ public class PicModel {
             FileOutputStream output = new FileOutputStream(new File("/var/tmp/instagrim/" + picid));
 
             output.write(b);
-            byte []  thumbb = picresize(picid.toString(),types[1]);
+            byte []  thumbb = picresize(picid.toString(),types[1], "");
             int thumblength= thumbb.length;
             ByteBuffer thumbbuf=ByteBuffer.wrap(thumbb);
-            byte[] processedb = picdecolour(picid.toString(),types[1]);
+            byte[] processedb = picdecolour(picid.toString(),types[1], "");
             ByteBuffer processedbuf=ByteBuffer.wrap(processedb);
             int processedlength=processedb.length;
             Session session = cluster.connect("instagrim");
@@ -86,11 +87,96 @@ public class PicModel {
             System.out.println("Error --> " + ex);
         }
     }
+    
+    public Avatar insertProfilePic(byte[] b, String type, String name, String user, Avatar av) {
+        try {
+            Convertors convertor = new Convertors();
 
-    public byte[] picresize(String picid,String type) {
+            String types[]=Convertors.SplitFiletype(type);
+            ByteBuffer buffer = ByteBuffer.wrap(b);
+            int length = b.length;
+            java.util.UUID picid = convertor.getTimeUUID();
+            
+            //The following is a quick and dirty way of doing this, will fill the disk quickly !
+            Boolean success = (new File("/var/tmp/instagrim/")).mkdirs();
+            FileOutputStream output = new FileOutputStream(new File("/var/tmp/instagrim/" + picid));
+
+            output.write(b);
+            byte []  thumbb = picresize(picid.toString(),types[1], "original");
+            int thumblength= thumbb.length;
+            ByteBuffer thumbbuf=ByteBuffer.wrap(thumbb);
+            byte[] processedb = picdecolour(picid.toString(),types[1], "original");
+            ByteBuffer processedbuf=ByteBuffer.wrap(processedb);
+            int processedlength=processedb.length;
+            Session session = cluster.connect("instagrim");
+
+            PreparedStatement psInsertPic = session.prepare("insert into pics ( picid, image,thumb,processed, user, interaction_time,imagelength,thumblength,processedlength,type,name) values(?,?,?,?,?,?,?,?,?,?,?)");
+            PreparedStatement psInsertPicToUser = session.prepare("insert into userpiclist ( picid, user, pic_added) values(?,?,?)");
+            PreparedStatement psInsertProfilePic = session.prepare("update userprofiles set avatar=? where login= ?");
+            
+            BoundStatement bsInsertPic = new BoundStatement(psInsertPic);
+            BoundStatement bsInsertPicToUser = new BoundStatement(psInsertPicToUser);
+            BoundStatement bsInsertProfilePic = new BoundStatement(psInsertProfilePic);
+
+            Date DateAdded = new Date();
+            session.execute(bsInsertPic.bind(picid, buffer, thumbbuf,processedbuf, user, DateAdded, length,thumblength,processedlength, type, name));
+            session.execute(bsInsertPicToUser.bind(picid, user, DateAdded));
+            session.execute(bsInsertProfilePic.bind(picid, user));
+            session.close();
+            
+            av.setPic(buffer, length, type);
+            av.setUUID(picid);
+            return av;
+
+        } catch (IOException ex) {
+            System.out.println("Error --> " + ex);
+        }
+        return av;
+    }
+    
+//    public Avatar insertProfilePic(byte[] b, String type, String name, String user, Avatar av) {
+//        try {
+//            Convertors convertor = new Convertors();
+//
+//            String types[]=Convertors.SplitFiletype(type);
+//            ByteBuffer buffer = ByteBuffer.wrap(b);
+//            int length = b.length;
+//            java.util.UUID picid = convertor.getTimeUUID();
+//            
+//            //The following is a quick and dirty way of doing this, will fill the disk quickly !
+//            Boolean success = (new File("/var/tmp/instagrim/")).mkdirs();
+//            FileOutputStream output = new FileOutputStream(new File("/var/tmp/instagrim/" + picid));
+//
+//            output.write(b);
+//            byte []  thumbb = picresize(picid.toString(),types[1]);
+//            int thumblength= thumbb.length;
+//            ByteBuffer thumbbuf=ByteBuffer.wrap(thumbb);
+//            Session session = cluster.connect("instagrim");
+//
+//            PreparedStatement psInsertPic = session.prepare("insert into pics ( picid, image,thumb, user, interaction_time,imagelength,thumblength,type,name) values(?,?,?,?,?,?,?,?,?)");
+//            PreparedStatement psInsertProfilePic = session.prepare("update userprofiles set avatar=? where login= ?");
+//            BoundStatement bsInsertPic = new BoundStatement(psInsertPic);
+//            BoundStatement bsInsertProfilePic = new BoundStatement(psInsertProfilePic);
+//
+//            Date DateAdded = new Date();
+//            session.execute(bsInsertPic.bind(picid, buffer, thumbbuf, user, DateAdded, length,thumblength, type, name));
+//            session.execute(bsInsertProfilePic.bind(picid, user));
+//            session.close();
+//            
+//            av.setPic(buffer, length, type);
+//            av.setUUID(picid);
+//            return av;
+//
+//        } catch (IOException ex) {
+//            System.out.println("Error --> " + ex);
+//        }
+//        return av;
+//    }
+
+    public byte[] picresize(String picid,String type, String filter) {
         try {
             BufferedImage BI = ImageIO.read(new File("/var/tmp/instagrim/" + picid));
-            BufferedImage thumbnail = createThumbnail(BI);
+            BufferedImage thumbnail = createThumbnail(BI, filter);
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             ImageIO.write(thumbnail, type, baos);
             baos.flush();
@@ -104,10 +190,10 @@ public class PicModel {
         return null;
     }
     
-    public byte[] picdecolour(String picid,String type) {
+    public byte[] picdecolour(String picid,String type, String filter) {
         try {
             BufferedImage BI = ImageIO.read(new File("/var/tmp/instagrim/" + picid));
-            BufferedImage processed = createProcessed(BI);
+            BufferedImage processed = createProcessed(BI, filter);
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             ImageIO.write(processed, type, baos);
             baos.flush();
@@ -120,16 +206,42 @@ public class PicModel {
         return null;
     }
 
-    public static BufferedImage createThumbnail(BufferedImage img) {
-        img = resize(img, Method.SPEED, 250, OP_ANTIALIAS, OP_GRAYSCALE);
-        // Let's add a little border before we return result.
-        return pad(img, 2);
+    public static BufferedImage createThumbnail(BufferedImage img, String filter) {
+        switch(filter)
+        {
+            case "original": 
+            {
+                img = resize(img, Method.SPEED, 250);
+                // Let's add a little border before we return result.
+                return pad(img, 2);
+            }
+            default:
+            {
+                img = resize(img, Method.SPEED, 250, OP_ANTIALIAS, OP_GRAYSCALE);
+                // Let's add a little border before we return result.
+                return pad(img, 2);
+            }
+                
+        }
+        
     }
     
-   public static BufferedImage createProcessed(BufferedImage img) {
-        int Width=img.getWidth()-1;
-        img = resize(img, Method.SPEED, Width, OP_ANTIALIAS, OP_GRAYSCALE);
-        return pad(img, 4);
+   public static BufferedImage createProcessed(BufferedImage img, String filter) {
+       switch(filter)
+        {
+            case "original": 
+            {
+                int Width=img.getWidth()-1;
+                img = resize(img, Method.SPEED, Width);
+                return pad(img, 4);
+            }
+            default:
+            {
+                int Width=img.getWidth()-1;
+                img = resize(img, Method.SPEED, Width, OP_ANTIALIAS, OP_GRAYSCALE);
+                return pad(img, 4);
+            }
+       }
     }
    
     public java.util.LinkedList<Pic> getPicsForUser(String User) {

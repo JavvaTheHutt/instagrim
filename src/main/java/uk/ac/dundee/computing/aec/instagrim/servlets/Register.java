@@ -7,6 +7,7 @@
 package uk.ac.dundee.computing.aec.instagrim.servlets;
 
 import com.datastax.driver.core.Cluster;
+import com.datastax.driver.core.Session;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -52,6 +53,7 @@ public class Register extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession session = request.getSession();
         String username=request.getParameter("username");
         String password=request.getParameter("password");
         String firstname=request.getParameter("firstname");
@@ -81,6 +83,7 @@ public class Register extends HttpServlet {
             //if the result was true user was registered and directed to home page and logged in automatically
             if(result.equals("Success"))
             {
+                session.setAttribute("ProfileBean", profile);
                 RequestDispatcher rd = request.getRequestDispatcher("/Login");
                 rd.forward(request, response); 
             }else{
