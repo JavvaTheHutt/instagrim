@@ -71,7 +71,7 @@ public class User {
                 }
             }
         //if statement to check that the username and password checks came back as empty to insert the new user
-        if(rs.isExhausted() && emailValidation==true)
+        if(rs.isExhausted()==false && emailValidation==true)
         {
             UserType addressType = cluster.getMetadata().getKeyspace("instagrim").getUserType("address");
             UDTValue address = addressType.newValue()
@@ -132,9 +132,9 @@ public class User {
         return false;
     }
         
-    public ProfileBean getProfile(ProfileBean profile, String user, Avatar av) throws Exception
+    public ProfileBean getProfile(ProfileBean profile, String user, Avatar av) //throws Exception
     {
-       try{
+//       try{
         Session session = cluster.connect("instagrim");
         PreparedStatement ps = session.prepare("select * from userprofiles where login=?");
         ResultSet rs = null;
@@ -163,11 +163,31 @@ public class User {
             }
             }
        }
-       }
-       catch(Exception e)
-       {
-           e.printStackTrace();
-       }
+//       }
+//       catch(Exception e)
+//       {
+//           e.printStackTrace();
+//       }
+        return profile;
+    }
+    
+    public ProfileBean UpdateProfile(ProfileBean profile, String user, String firstname, String lastname, String email) //throws Exception
+    {
+//       try{
+        Session session = cluster.connect("instagrim");
+
+        PreparedStatement ps = session.prepare("update userprofiles set first_name= ? where login= ?");
+        BoundStatement bs = new BoundStatement(ps);
+        session.execute(bs.bind(firstname, user));
+        ps = session.prepare("update userprofiles set last_name= ? where login= ?");
+        bs = new BoundStatement(ps);
+        session.execute(bs.bind(lastname, user));
+        ps = session.prepare("update userprofiles set email= ? where login= ?");
+        bs = new BoundStatement(ps);
+        session.execute(bs.bind(email, user));
+        profile.setFirstName(firstname);
+        profile.setLastName(lastname);
+        profile.setEmail(email);
         return profile;
     }
     

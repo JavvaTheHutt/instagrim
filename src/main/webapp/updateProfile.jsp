@@ -25,11 +25,7 @@
         <script src="/Instagrim/bootstrap/js/main.js"></script>
         <script src="/Instagrim/bootstrap/js/wow.min.js"></script>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <script>
-            function sessionUploadSet() {
-                <%session.setAttribute("uploadProfile", true);%>
-            }
-        </script>
+        
         <% LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");
            session.setAttribute("username", lg.getUsername());
            ProfileBean profile = (ProfileBean) session.getAttribute("ProfileBean");
@@ -96,6 +92,7 @@
                                     <input class="form-control" type="number" name="postcode" value="<%=profile.getPostCode()%>">
                                 </div>
                                     <button  type="submit" class="btn btn-primary">Update Profile</button>
+                                    <input class="hidden" type="text" name="page" value="Update">
                              </form>
                         </div>                  
                     </div>

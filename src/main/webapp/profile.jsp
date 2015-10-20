@@ -88,7 +88,9 @@
                             <p><%=profile.getAddress()%></p>
                                 </ul>
                         </div>
-                        <div class="col-md-3"></div>
+                                <div class="col-md-3">
+                                    <a href="/Instagrim/Update/<%=lg.getUsername()%>">update profile</a>
+                                </div>
                     </div>
                     <div class="col-md-3"></div>
                </div>

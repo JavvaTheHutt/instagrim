@@ -19,16 +19,17 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import uk.ac.dundee.computing.aec.instagrim.lib.CassandraHosts;
 import uk.ac.dundee.computing.aec.instagrim.lib.Convertors;
-import uk.ac.dundee.computing.aec.instagrim.stores.LoggedIn;
+import uk.ac.dundee.computing.aec.instagrim.models.User;
+import uk.ac.dundee.computing.aec.instagrim.stores.*;
 
 /**
  *
  * @author MatthewLang
  */
-@WebServlet(name = "Profile", urlPatterns = {"/Profile", "/Profile/*"})
+@WebServlet(name = "Profile", urlPatterns = {"/Profile", "/Profile/*", "/Update/*"})
 public class Profile extends HttpServlet {
     
-    private Cluster cluster;
+    private Cluster cluster = null;
     private HashMap CommandsMap = new HashMap();
     
     public Profile()
@@ -36,6 +37,7 @@ public class Profile extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
         CommandsMap.put("Profile", 1);
+        CommandsMap.put("Update", 2);        
     }
     
     public void init(ServletConfig config) throws ServletException {
@@ -65,8 +67,38 @@ public class Profile extends HttpServlet {
             case 1:
                 DisplayProfile(request, response);
                 break;
+            case 2:
+                DisplayUpdate(request, response);
+                break;
             default:
                 error("Bad Operator", response);
+        }
+    }
+    
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException
+    {
+        String action = request.getParameter("page");
+        if("Update".equals(action))
+        {
+            String firstname = request.getParameter("firstname");
+            String lastname = request.getParameter("lastname");
+            String email = request.getParameter("email");
+            String street = request.getParameter("street");
+            String city = request.getParameter("city");
+            int postcode = Integer.parseInt(request.getParameter("postcode"));
+            
+            User us = new User();
+            us.setCluster(cluster);
+            HttpSession session = request.getSession();
+            ProfileBean pb = (ProfileBean) session.getAttribute("ProfileBean");
+            LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");
+            pb = us.UpdateProfile(pb, lg.getUsername(), firstname, lastname, email);
+            session.setAttribute("ProfileBean", pb);
+            response.sendRedirect("/Instagrim/Profile/" + lg.getUsername());
+        }else{
+            
         }
     }
     
@@ -74,6 +106,13 @@ public class Profile extends HttpServlet {
             throws ServletException, IOException
     {
         RequestDispatcher rd = request.getRequestDispatcher("/profile.jsp");
+        rd.forward(request, response);
+    }
+    
+    protected void DisplayUpdate(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException
+    {
+        RequestDispatcher rd = request.getRequestDispatcher("/updateProfile.jsp");
         rd.forward(request, response);
     }
     

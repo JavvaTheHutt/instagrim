@@ -76,13 +76,14 @@ public class Login extends HttpServlet {
                 session.setAttribute("LoggedIn", lg);
                 ProfileBean profile = new ProfileBean();
                 Avatar av = new Avatar();
-                try {
+//                try {
                     profile = us.getProfile(profile ,username, av);
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                }
+//                } catch (Exception ex) {
+//                    ex.printStackTrace();
+//                }
                 session.setAttribute("ProfileBean", profile);
                 session.setAttribute("Avatar", profile.getAvatar());
+                session.setAttribute("uploadProfile", null);
                 System.out.println("Session in servlet "+session);
                 response.sendRedirect("/Instagrim");
         }else{
