@@ -32,7 +32,7 @@
                     <div class="container">
                       <!-- Brand and toggle get grouped for better mobile display -->
                       <div id="navHead" class="navbar-header">
-                        <a id="brand" class="navbar-brand" href="/Instagrim/">BELLEND</a>
+                        <a id="brand" class="navbar-brand" href="/Instagrim/">Instagrim</a>
                         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                           <span class="sr-only">Toggle navigation</span>
                           <span class="icon-bar"></span>
