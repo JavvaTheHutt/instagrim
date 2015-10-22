@@ -32,7 +32,7 @@
                     <div class="container">
                       <!-- Brand and toggle get grouped for better mobile display -->
                       <div id="navHead" class="navbar-header">
-                        <a id="brand" class="navbar-brand" href="/Instagrim/">Instagrim</a>
+                        <a id="brand" class="navbar-brand" href="/Instagrim/">BELLEND</a>
                         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                           <span class="sr-only">Toggle navigation</span>
                           <span class="icon-bar"></span>
@@ -54,7 +54,7 @@
                                   {
                               %>
                               <ul class="nav navbar-nav">
-                                <li><a href="/Instagrim/upload.jsp">Upload</a></li>
+                                <li><a href="/Instagrim/Upload">Upload</a></li>
                                 <li><a href="/Instagrim/Images/<%=UserName%>">Your Images</a></li>
                                 <li><a href="/Instagrim/Profile/<%=UserName%>">Profile</a></li>
                               </ul>
@@ -66,7 +66,7 @@
                               %>
                                 <ul id="rightnav" class="nav navbar-nav navbar-right">
                                     <li><a href="/Instagrim/Register"><span class="glyphicon glyphicon-user"></span> SignUp</a></li>
-                                    <li><a href="login.jsp"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                                    <li><a href="/Instagrim/Login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
                                 </ul>
                               <%
                                   }
@@ -87,7 +87,7 @@
                               if(lg == null)
                               {
                               %>
-                        <a href="register.jsp"><button id="animBtn" type="button" class="btn btn-transparent wow slideInLeft">Sign Up</button></a>
+                        <a href="/Instagrim/Register"><button id="animBtn" type="button" class="btn btn-transparent wow slideInLeft">Sign Up</button></a>
                         <%}%>
                     </div>
                 </div>

@@ -108,7 +108,14 @@ body{
 {
     background-color: #f7f7f7;
     padding: 1%;
+    border: 0;
     
+}
+
+#RecentPictures
+{
+    margin-top: 0%;
+    text-align: center;
 }
 
 #avatar
@@ -125,3 +132,29 @@ body{
 {
             visibility: visible;
 }
+
+#AboutUser
+{
+    text-align: center;
+}
+#profilePic
+{
+    max-height: 100%;
+    max-width: 100%;
+}
+#commentBox
+{
+    max-width: 30%;
+}
+#commentInput
+{
+    display: -webkit-box;
+    margin-top: 1%;
+    width: inherit;
+    padding-left: 1.2%;
+}
+#commentButton
+{
+    margin-top: 0;
+}
+

@@ -38,62 +38,74 @@
     </head>
     <body>
         <div id="navbar" class="navbar navbar-inverse navbar-static-top">
-                    <div class="container">
-                      <!-- Brand and toggle get grouped for better mobile display -->
-                      <div id="navHead" class="navbar-header">
-                        <a id="brand" class="navbar-brand" href="/Instagrim/">Instagrim</a>
-                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                          <span class="sr-only">Toggle navigation</span>
-                          <span class="icon-bar"></span>
-                          <span class="icon-bar"></span>
-                          <span class="icon-bar"></span>
-                        </button>
-                          
-                      </div>
-                            
+            <div class="container">
+              <!-- Brand and toggle get grouped for better mobile display -->
+              <div id="navHead" class="navbar-header">
+                <a id="brand" class="navbar-brand" href="/Instagrim/">Instagrim</a>
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                </button>
 
-                      <!-- Collect the nav links, forms, and other content for toggling -->
-                      <div class="collapse navbar-collapse">
-                              <ul class="nav navbar-nav">
-                                <li><a href="/Instagrim/upload.jsp">Upload</a></li>
-                                <li><a href="/Instagrim/Images/<%=lg.getUsername()%>">Your Images</a></li>
-                                <li class="active"><a href="/Instagrim/Profile/<%=lg.getUsername()%>">Profile</a></li>
-                              </ul>
-                              <ul id="rightnav" class="nav navbar-nav navbar-right">
-                                <li><a href="/Instagrim/Logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
-                              </ul>
-                      </div><!-- /.navbar-collapse -->
-                    </div><!-- /.container-fluid -->
-                  </div>
+              </div>
+
+
+              <!-- Collect the nav links, forms, and other content for toggling -->
+              <div class="collapse navbar-collapse">
+                      <ul class="nav navbar-nav">
+                        <li><a href="/Instagrim/Upload">Upload</a></li>
+                        <li><a href="/Instagrim/Images/<%=lg.getUsername()%>">Your Images</a></li>
+                        <li class="active"><a href="/Instagrim/Profile/<%=lg.getUsername()%>">Profile</a></li>
+                      </ul>
+                      <ul id="rightnav" class="nav navbar-nav navbar-right">
+                        <li><a href="/Instagrim/Logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+                      </ul>
+              </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+          </div>
                               
-                <div class="container">              
-                <div id="profileContent" class="row">
-                    <div class="col-md-3"></div>
+        <div class="container">              
+            <div id="profileContent" class="row">
+                <div class="col-md-3"></div>
                     <div id="profileBox" class="container">
                         <div class="col-md-3">
-                            <% if(profile.getAvatar() != null)
-                                { System.out.println("This means avatar is not null");%>
-                                <ul>
-                                    <li id="avatar"><a href="/Instagrim/Image/<%=profile.getAvatar().getSUUID()%>"><img id="avatarImg" class="img-circle" src="/Instagrim/Thumb/<%=profile.getAvatar().getSUUID()%> "></a><br/><a id="uploadText" href="/Instagrim/upload.jsp" onclick="sessionUploadSet()">Change Avatar</a></li><br/>
-                            <% }else{ 
-                            %>
-                                <ul>
-                                    <li id="avatar"><img id="avatarImg" class="img-circle" src="/Instagrim/images/Vendetta.jpg"><br/><a id="uploadText" href="/Instagrim/upload.jsp" onclick="sessionUploadSet()">Change Avatar</a></li>
-                                    
-                            <%}%>
-                            
-                            <p><%=profile.getFirstName() + " " + profile.getLastName()%></p>
-                            <p><%=lg.getUsername()%></p>
-                            <p><%=profile.getEmail()%></p>
-                            <p><%=profile.getAddress()%></p>
-                                </ul>
+                            <ul>
+                                <div id="profilePic">
+                                    <% if(profile.getAvatar() != null)
+                                        { System.out.println("This means avatar is not null");%>
+                                            <li id="avatar"><a href="/Instagrim/Image/<%=profile.getAvatar().getSUUID()%>"><img id="avatarImg" class="img-responsive" src="/Instagrim/Image/<%=profile.getAvatar().getSUUID()%> "></a><a id="uploadText" href="/Instagrim/Upload" onclick="sessionUploadSet()">Change Avatar <span class="glyphicon glyphicon-cloud-upload"></span></a></li><br/>
+                                    <% }else{ 
+                                    %>
+                                            <li id="avatar"><img class="img-responsive" id="avatarImg" src="/Instagrim/images/Vendetta.jpg"><a id="uploadText" href="/Instagrim/Upload" onclick="sessionUploadSet()">Change Avatar <span class="glyphicon glyphicon-cloud-upload"></span></a></li>
+                                    <%}%>
+                                </div>
+                                <h4 class="h4">Name:</h4>
+                                        <li id="avatar"><%=profile.getFirstName() + " " + profile.getLastName()%></li>
+                                <h4 class="h4">Username:</h4>
+                                        <li id="avatar"><%=lg.getUsername()%></li>
+                                <h4 class="h4">Email:</h4>        
+                                        <li id="avatar"><%=profile.getEmail()%></li>
+                                <h4 class="h4">Address:</h4>        
+                                        <li id="avatar"><%=profile.getAddress()%></li>
+                            </ul>
                         </div>
-                                <div class="col-md-3">
+                                <div id="AboutUser" class="col-md-3">
                                     <a href="/Instagrim/Update/<%=lg.getUsername()%>">update profile</a>
                                 </div>
                     </div>
-                    <div class="col-md-3"></div>
-               </div>
-               </div>
+                <div class="col-md-3"></div>
+           </div>
+        </div>
+        <div class="container">              
+            <div id="RecentPictures" class="row">
+                <div id="profileBox" class="container">
+                    <div class="col-md-6 col-md-offset-3">
+                        <h3 class="h3">Recent Pictures</h3>
+                    </div>
+                </div>
+           </div>
+       </div>
     </body>
 </html>

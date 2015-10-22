@@ -63,15 +63,18 @@ public class User {
         //executing the boundstatement to check if the email is already in use
        BoundStatement boundStatement1 = new BoundStatement(ps1);
        rs1 = session.execute(boundStatement1);
-       for(Row row : rs1) {
+       if(rs1.isExhausted()== false)
+       {
+          for(Row row : rs1) {
                
                 String email = row.getString("email");
                 if (email.equalsIgnoreCase(profile.getEmail())){
                     emailValidation = false;
                 }
-            }
+            } 
+       }
         //if statement to check that the username and password checks came back as empty to insert the new user
-        if(rs.isExhausted()==false && emailValidation==true)
+        if(rs.isExhausted() && emailValidation==true)
         {
             UserType addressType = cluster.getMetadata().getKeyspace("instagrim").getUserType("address");
             UDTValue address = addressType.newValue()
@@ -90,7 +93,7 @@ public class User {
         }
         //if the checks came back with results allerting the user to the problem
         else{
-            if(rs.isExhausted())
+            if(rs.isExhausted()==false)
             {
                 return "UsernameFail";
             }
@@ -141,18 +144,23 @@ public class User {
         ResultSet rs1 = null;
         BoundStatement bs = new BoundStatement(ps);
         rs = session.execute(bs.bind(user));
-        ps = session.prepare("select image,imagelength,type from pics where picid =?");
-        bs = new BoundStatement(ps);
         for(Row row : rs){
             if(row.getUUID("avatar")!= null)
             {
+            ps = session.prepare("select image,imagelength,type from pics where picid =?");
+            bs = new BoundStatement(ps);
             rs1 = session.execute(bs.bind(row.getUUID("avatar")));
+            }
+            else{
+                rs1 = null;
             }
             profile.setFirstName(row.getString("first_name"));
             profile.setLastName(row.getString("last_name"));
             profile.setEmail(row.getString("email"));
-            if(rs1.isExhausted())
-            {}
+            if(rs1==null)
+            {
+                profile.setAvatar(null);
+            }
             else
             {
             for(Row row1 : rs1)

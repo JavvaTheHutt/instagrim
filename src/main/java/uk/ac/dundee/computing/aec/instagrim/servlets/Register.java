@@ -72,7 +72,7 @@ public class Register extends HttpServlet {
         //makes sure that the fields are not emtpy to avoid database registering a blank user
         if(password.isEmpty() || username.isEmpty() || firstname.isEmpty() || lastname.isEmpty() || email.isEmpty() || street.isEmpty() || city.isEmpty())
         {
-            response.sendRedirect("register.jsp");
+            response.sendRedirect("/Instagrim/Register");
         }
         else
         {
@@ -87,7 +87,8 @@ public class Register extends HttpServlet {
                 RequestDispatcher rd = request.getRequestDispatcher("/Login");
                 rd.forward(request, response); 
             }else{
-                response.sendRedirect("register.jsp");
+                System.out.println(result);
+                response.sendRedirect("/Instagrim/Register");
             }
         }
         

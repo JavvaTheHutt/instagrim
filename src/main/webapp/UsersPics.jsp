@@ -26,7 +26,9 @@
         <script src="/Instagrim/bootstrap/js/main.js"></script>
         <script src="/Instagrim/bootstrap/js/wow.min.js"></script>
     </head>
-    <body>        
+    <body>
+        <%  LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");
+            %>
         <div id="navbar" class="navbar navbar-inverse navbar-static-top">
                     <div class="container">
                       <!-- Brand and toggle get grouped for better mobile display -->
@@ -45,7 +47,7 @@
                       <!-- Collect the nav links, forms, and other content for toggling -->
                       <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li><a href="/Instagrim/upload.jsp">Upload</a></li>
+                <li><a href="/Instagrim/Upload">Upload</a></li>
                 <li><a href="/Instagrim/Images/majed">Sample Images</a></li>
             </ul>
         </div>
@@ -53,8 +55,8 @@
         </div>
  
         <article id="gallery" class="gallery">
-            <div class="container">
-            <h1>Your Pics</h1>
+        <div id="ImagesConatainer" class="container">
+            <h3 class="h3">Your Pics</h3>
         <%
             java.util.LinkedList<Pic> lsPics = (java.util.LinkedList<Pic>) request.getAttribute("Pics");
             if (lsPics == null) {
@@ -68,12 +70,21 @@
                 Pic p = (Pic) iterator.next();
 
         %>
-        <a href="/Instagrim/Image/<%=p.getSUUID()%>" ><img src="/Instagrim/Thumb/<%=p.getSUUID()%>"></a><br/><%
+        <a href="/Instagrim/Image/<%=p.getSUUID()%>" ><img src="/Instagrim/Thumb/<%=p.getSUUID()%>"></a>
+        <form class="form-horizontal" method="POST" action="" role="form">
+            <div id="commentInput" class="form-group">
+                    <input id="commentBox" class="form-control" type="text" name="comment" placeholder="Comment...">
+                    <button id="commentButton"  type="submit" class="btn btn-primary">comment</button>
+            </div>
+            <input class="hidden" type="text" name="picid" value="<%=p.getSUUID()%>">
+            <input class="hidden" type="text" name="username" value="<%=lg.getUsername()%>">
+        </form>
+        <br/><%
 
             }
             }
         %>
-            </div>
+        </div>
         </article>
     </body>
 </html>

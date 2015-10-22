@@ -133,45 +133,6 @@ public class PicModel {
         }
         return av;
     }
-    
-//    public Avatar insertProfilePic(byte[] b, String type, String name, String user, Avatar av) {
-//        try {
-//            Convertors convertor = new Convertors();
-//
-//            String types[]=Convertors.SplitFiletype(type);
-//            ByteBuffer buffer = ByteBuffer.wrap(b);
-//            int length = b.length;
-//            java.util.UUID picid = convertor.getTimeUUID();
-//            
-//            //The following is a quick and dirty way of doing this, will fill the disk quickly !
-//            Boolean success = (new File("/var/tmp/instagrim/")).mkdirs();
-//            FileOutputStream output = new FileOutputStream(new File("/var/tmp/instagrim/" + picid));
-//
-//            output.write(b);
-//            byte []  thumbb = picresize(picid.toString(),types[1]);
-//            int thumblength= thumbb.length;
-//            ByteBuffer thumbbuf=ByteBuffer.wrap(thumbb);
-//            Session session = cluster.connect("instagrim");
-//
-//            PreparedStatement psInsertPic = session.prepare("insert into pics ( picid, image,thumb, user, interaction_time,imagelength,thumblength,type,name) values(?,?,?,?,?,?,?,?,?)");
-//            PreparedStatement psInsertProfilePic = session.prepare("update userprofiles set avatar=? where login= ?");
-//            BoundStatement bsInsertPic = new BoundStatement(psInsertPic);
-//            BoundStatement bsInsertProfilePic = new BoundStatement(psInsertProfilePic);
-//
-//            Date DateAdded = new Date();
-//            session.execute(bsInsertPic.bind(picid, buffer, thumbbuf, user, DateAdded, length,thumblength, type, name));
-//            session.execute(bsInsertProfilePic.bind(picid, user));
-//            session.close();
-//            
-//            av.setPic(buffer, length, type);
-//            av.setUUID(picid);
-//            return av;
-//
-//        } catch (IOException ex) {
-//            System.out.println("Error --> " + ex);
-//        }
-//        return av;
-//    }
 
     public byte[] picresize(String picid,String type, String filter) {
         try {

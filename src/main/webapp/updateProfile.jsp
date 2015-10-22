@@ -51,7 +51,7 @@
                       <!-- Collect the nav links, forms, and other content for toggling -->
                       <div class="collapse navbar-collapse">
                               <ul class="nav navbar-nav">
-                                <li><a href="/Instagrim/upload.jsp">Upload</a></li>
+                                <li><a href="/Instagrim/Upload">Upload</a></li>
                                 <li><a href="/Instagrim/Images/<%=lg.getUsername()%>">Your Images</a></li>
                                 <li class="active"><a href="/Instagrim/Profile/<%=lg.getUsername()%>">Profile</a></li>
                               </ul>
