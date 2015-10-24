@@ -30,12 +30,14 @@ import java.io.InputStream;
 import java.nio.ByteBuffer;
 import java.util.Date;
 import java.util.LinkedList;
+import java.util.UUID;
 import javax.imageio.ImageIO;
 import static org.imgscalr.Scalr.*;
 import org.imgscalr.Scalr.Method;
 
 import uk.ac.dundee.computing.aec.instagrim.lib.*;
 import uk.ac.dundee.computing.aec.instagrim.stores.Avatar;
+import uk.ac.dundee.computing.aec.instagrim.stores.Comment;
 import uk.ac.dundee.computing.aec.instagrim.stores.Pic;
 //import uk.ac.dundee.computing.aec.stores.TweetStore;
 
@@ -231,6 +233,29 @@ public class PicModel {
         }
         return Pics;
     }
+    
+    public java.util.LinkedList<Comment> getComments(){
+        LinkedList<Comment> comments = new LinkedList<>();
+        Session session = cluster.connect("instagrim");
+        PreparedStatement ps = session.prepare("select * from piccomments");
+        ResultSet rs = null;
+        BoundStatement bs = new BoundStatement(ps);
+        rs = session.execute(bs);
+        if(rs.isExhausted())
+        {
+            return null;
+        }else{
+            for(Row row : rs)
+            {
+                Comment c = new Comment();
+                c.setComment(row.getString("comment"));
+                c.setPicid(row.getUUID("picid"));
+                c.setUsername(row.getString("user"));
+                comments.add(c);
+            }
+        }
+        return comments;
+    }
 
     public Pic getPic(int image_type, java.util.UUID picid) {
         Session session = cluster.connect("instagrim");
@@ -286,6 +311,17 @@ public class PicModel {
 
         return p;
 
+    }
+    
+    public void addComment(String comment, String picid, String username)
+    {
+        Session session = cluster.connect("instagrim");
+        Convertors convertor = new Convertors();
+        UUID commentid = convertor.getTimeUUID();
+        UUID pictureID = UUID.fromString(picid);
+        PreparedStatement ps = session.prepare("insert into piccomments (commentid, comment, picid, user) values(?,?,?,?)");
+        BoundStatement bs = new BoundStatement(ps);
+        session.execute(bs.bind(commentid,comment,pictureID,username));    
     }
 
 }

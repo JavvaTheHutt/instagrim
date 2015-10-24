@@ -157,6 +157,22 @@ public class User {
             profile.setFirstName(row.getString("first_name"));
             profile.setLastName(row.getString("last_name"));
             profile.setEmail(row.getString("email"));
+            Object[] objAddress = row.getMap("addresses", String.class, UDTValue.class).values().toArray();
+            String[] strAddress = new String[2];
+            int zip =0;
+        
+            try {
+                UDTValue address = (UDTValue)objAddress[0];
+                strAddress[0] = address.getString("street");
+                strAddress[1] = address.getString("city");
+                zip = address.getInt("zip");
+            }
+            catch (ArrayIndexOutOfBoundsException e) {
+            
+            }
+        
+            profile.setAddress(strAddress[0], strAddress[1], zip);
+        
             if(rs1==null)
             {
                 profile.setAvatar(null);

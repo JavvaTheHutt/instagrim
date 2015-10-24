@@ -26,6 +26,7 @@ import uk.ac.dundee.computing.aec.instagrim.lib.CassandraHosts;
 import uk.ac.dundee.computing.aec.instagrim.lib.Convertors;
 import uk.ac.dundee.computing.aec.instagrim.models.PicModel;
 import uk.ac.dundee.computing.aec.instagrim.stores.Avatar;
+import uk.ac.dundee.computing.aec.instagrim.stores.Comment;
 import uk.ac.dundee.computing.aec.instagrim.stores.LoggedIn;
 import uk.ac.dundee.computing.aec.instagrim.stores.Pic;
 import uk.ac.dundee.computing.aec.instagrim.stores.ProfileBean;
@@ -100,8 +101,10 @@ public class Image extends HttpServlet {
         PicModel tm = new PicModel();
         tm.setCluster(cluster);
         java.util.LinkedList<Pic> lsPics = tm.getPicsForUser(User);
+        java.util.LinkedList<Comment> lsComment = tm.getComments();
         RequestDispatcher rd = request.getRequestDispatcher("/UsersPics.jsp");
         request.setAttribute("Pics", lsPics);
+        request.setAttribute("Comments", lsComment);
         rd.forward(request, response);
 
     }
@@ -128,6 +131,25 @@ public class Image extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String cameFrom = request.getParameter("cameFrom");
+        if(cameFrom.equals("aComment"))
+        {
+            String args[] = Convertors.SplitRequestPath(request);
+            String comment = request.getParameter("comment");
+            String username = request.getParameter("username");
+            String picid = request.getParameter("picid");
+            PicModel pm = new PicModel();
+            pm.setCluster(cluster);
+            if(comment.isEmpty())
+            {
+                response.sendRedirect("/Instagrim/Images/" + args[2]);
+            }else{
+                pm.addComment(comment, picid, username);
+                response.sendRedirect("/Instagrim/Images/" + args[2]);
+            }
+        }
+        else
+        {
         boolean profilePage = false;
         HttpSession session=request.getSession();
         LoggedIn lg= (LoggedIn)session.getAttribute("LoggedIn");
@@ -181,6 +203,7 @@ public class Image extends HttpServlet {
 //            rd.forward(request, response);
               response.sendRedirect("/Instagrim/Profile/" + lg.getUsername());
             }
+        }
         
 
     }

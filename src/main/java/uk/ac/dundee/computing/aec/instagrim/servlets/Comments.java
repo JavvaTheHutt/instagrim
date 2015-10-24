@@ -5,13 +5,18 @@
  */
 package uk.ac.dundee.computing.aec.instagrim.servlets;
 
+import com.datastax.driver.core.Cluster;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import uk.ac.dundee.computing.aec.instagrim.lib.CassandraHosts;
+import uk.ac.dundee.computing.aec.instagrim.lib.Convertors;
+import uk.ac.dundee.computing.aec.instagrim.models.PicModel;
 
 /**
  *
@@ -19,6 +24,12 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "Comments", urlPatterns = {"/Comments"})
 public class Comments extends HttpServlet {
+    
+    Cluster cluster=null;
+    public void init(ServletConfig config) throws ServletException {
+        // TODO Auto-generated method stub
+        cluster = CassandraHosts.getCluster();
+    }
 
     /**
      * Handles the HTTP <code>POST</code> method.
@@ -31,6 +42,19 @@ public class Comments extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String args[] = Convertors.SplitRequestPath(request);
+        String comment = request.getParameter("comment");
+        String username = request.getParameter("username");
+        String picid = request.getParameter("picid");
+        PicModel pm = new PicModel();
+        pm.setCluster(cluster);
+        
+        if(comment.isEmpty())
+        {
+            response.sendRedirect("/Instagrim/Images/" + args[2]);
+        }else{
+            
+        }
     }
 
     /**

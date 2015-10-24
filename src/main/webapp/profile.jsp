@@ -68,9 +68,8 @@
                               
         <div class="container">              
             <div id="profileContent" class="row">
-                <div class="col-md-3"></div>
-                    <div id="profileBox" class="container">
-                        <div class="col-md-3">
+                <div id="profileBox" class="container">
+                        <div class="col-md-4">
                             <ul>
                                 <div id="profilePic">
                                     <% if(profile.getAvatar() != null)
@@ -81,6 +80,10 @@
                                             <li id="avatar"><img class="img-responsive" id="avatarImg" src="/Instagrim/images/Vendetta.jpg"><a id="uploadText" href="/Instagrim/Upload" onclick="sessionUploadSet()">Change Avatar <span class="glyphicon glyphicon-cloud-upload"></span></a></li>
                                     <%}%>
                                 </div>
+                            </ul>
+                        </div>
+                        <div class="col-md-4">
+                            <ul>
                                 <h4 class="h4">Name:</h4>
                                         <li id="avatar"><%=profile.getFirstName() + " " + profile.getLastName()%></li>
                                 <h4 class="h4">Username:</h4>
@@ -91,11 +94,10 @@
                                         <li id="avatar"><%=profile.getAddress()%></li>
                             </ul>
                         </div>
-                                <div id="AboutUser" class="col-md-3">
-                                    <a href="/Instagrim/Update/<%=lg.getUsername()%>">update profile</a>
-                                </div>
+                        <div class="col-md-4">
+                            <a href="/Instagrim/Update/<%=lg.getUsername()%>">update profile</a>
+                        </div>
                     </div>
-                <div class="col-md-3"></div>
            </div>
         </div>
         <div class="container">              

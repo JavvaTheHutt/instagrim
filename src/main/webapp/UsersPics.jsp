@@ -56,9 +56,10 @@
  
         <article id="gallery" class="gallery">
         <div id="ImagesConatainer" class="container">
-            <h3 class="h3">Your Pics</h3>
+            <h3 class="h3">Your Pictures</h3>
         <%
             java.util.LinkedList<Pic> lsPics = (java.util.LinkedList<Pic>) request.getAttribute("Pics");
+            java.util.LinkedList<Comment> lsComments = (java.util.LinkedList<Comment>) request.getAttribute("Comments");
             if (lsPics == null) {
         %>
         <p>No Pictures found</p>
@@ -70,14 +71,35 @@
                 Pic p = (Pic) iterator.next();
 
         %>
-        <a href="/Instagrim/Image/<%=p.getSUUID()%>" ><img src="/Instagrim/Thumb/<%=p.getSUUID()%>"></a>
-        <form class="form-horizontal" method="POST" action="" role="form">
+        <a href="/Instagrim/Image/<%=p.getSUUID()%>" ><img id="userImage" src="/Instagrim/Image/<%=p.getSUUID()%>"></a>
+        <% if (lsComments == null) {}else{
+            Iterator<Comment> iterator2;
+            iterator2 = lsComments.iterator();
+            while (iterator2.hasNext()) {
+                Comment c = (Comment) iterator2.next();
+                if(c.getPicid().toString().equals(p.getSUUID()))
+                {
+        %>
+            <div id="commentDisplay"class="container">
+                <div class="row">
+                    <div class="col-md-4 col-md-offset-1">
+                        <ul>
+                            <li id="commentUsername"><%=c.getUsername()%></li>
+                            <li id="CommentComment"><%=c.getComment()%></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+        <%}}}%>
+        <form class="form-horizontal" method="POST"  role="form">
             <div id="commentInput" class="form-group">
-                    <input id="commentBox" class="form-control" type="text" name="comment" placeholder="Comment...">
+                    <textarea id="commentBox" class="form-control" type="text" name="comment" placeholder="Comment..."></textarea>
                     <button id="commentButton"  type="submit" class="btn btn-primary">comment</button>
             </div>
             <input class="hidden" type="text" name="picid" value="<%=p.getSUUID()%>">
             <input class="hidden" type="text" name="username" value="<%=lg.getUsername()%>">
+            <input class="hidden" type="text" name="cameFrom" value="aComment">
         </form>
         <br/><%
 
