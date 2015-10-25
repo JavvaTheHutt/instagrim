@@ -91,6 +91,10 @@
                                     <label>PostCode:</label>
                                     <input class="form-control" type="number" name="postcode" value="<%=profile.getPostCode()%>">
                                 </div>
+                                <div class="form-group">
+                                    <label>About:</label>
+                                    <textarea class="form-control" type="text" name="about" value="<%=profile.getAbout()%>"></textarea>
+                                </div>
                                     <button  type="submit" class="btn btn-primary">Update Profile</button>
                                     <input class="hidden" type="text" name="page" value="Update">
                              </form>

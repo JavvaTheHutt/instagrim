@@ -25,11 +25,6 @@
         <script src="/Instagrim/bootstrap/js/main.js"></script>
         <script src="/Instagrim/bootstrap/js/wow.min.js"></script>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <script>
-            function sessionUploadSet() {
-                <%session.setAttribute("uploadProfile", true);%>
-            }
-        </script>
         <% LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");
            session.setAttribute("username", lg.getUsername());
            ProfileBean profile = (ProfileBean) session.getAttribute("ProfileBean");
@@ -74,10 +69,10 @@
                                 <div id="profilePic">
                                     <% if(profile.getAvatar() != null)
                                         { System.out.println("This means avatar is not null");%>
-                                            <li id="avatar"><a href="/Instagrim/Image/<%=profile.getAvatar().getSUUID()%>"><img id="avatarImg" class="img-responsive" src="/Instagrim/Image/<%=profile.getAvatar().getSUUID()%> "></a><a id="uploadText" href="/Instagrim/Upload" onclick="sessionUploadSet()">Change Avatar <span class="glyphicon glyphicon-cloud-upload"></span></a></li><br/>
+                                            <li id="avatar"><a href="/Instagrim/Image/<%=profile.getAvatar().getSUUID()%>"><img id="avatarImg" class="img-responsive" src="/Instagrim/Image/<%=profile.getAvatar().getSUUID()%> "></a><a id="uploadText" href="/Instagrim/UploadProfile">Change Avatar <span class="glyphicon glyphicon-cloud-upload"></span></a></li><br/>
                                     <% }else{ 
                                     %>
-                                            <li id="avatar"><img class="img-responsive" id="avatarImg" src="/Instagrim/images/Vendetta.jpg"><a id="uploadText" href="/Instagrim/Upload" onclick="sessionUploadSet()">Change Avatar <span class="glyphicon glyphicon-cloud-upload"></span></a></li>
+                                            <li id="avatar"><img class="img-responsive" id="avatarImg" src="/Instagrim/images/Vendetta.jpg"><a id="uploadText" href="/Instagrim/UploadProfile">Change Avatar <span class="glyphicon glyphicon-cloud-upload"></span></a></li>
                                     <%}%>
                                 </div>
                             </ul>
@@ -95,6 +90,11 @@
                             </ul>
                         </div>
                         <div class="col-md-4">
+                            <h3 class="h3">About</h3>
+                            <%if(profile.getAbout() !=null)
+                            {%>
+                            <p><%=profile.getAbout()%></p>
+                            <%}%>
                             <a href="/Instagrim/Update/<%=lg.getUsername()%>">update profile</a>
                         </div>
                     </div>

@@ -37,6 +37,7 @@
                     <li>Street <input type="text" name="street"></li>
                     <li>City <input type="text" name="city"></li>
                     <li>PostCode <input type="number" name="postcode"></li>
+                    <li>About <textarea type="text" name="about"></textarea></li>
                 </ul>
                 <br/>
                 <input type="submit" value="Register"> 

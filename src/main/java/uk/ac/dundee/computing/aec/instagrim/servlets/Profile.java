@@ -88,13 +88,14 @@ public class Profile extends HttpServlet {
             String street = request.getParameter("street");
             String city = request.getParameter("city");
             int postcode = Integer.parseInt(request.getParameter("postcode"));
+            String about= request.getParameter("about");
             
             User us = new User();
             us.setCluster(cluster);
             HttpSession session = request.getSession();
             ProfileBean pb = (ProfileBean) session.getAttribute("ProfileBean");
             LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");
-            pb = us.UpdateProfile(pb, lg.getUsername(), firstname, lastname, email);
+            pb = us.UpdateProfile(pb, lg.getUsername(), firstname, lastname, email, street, city, postcode, about);
             session.setAttribute("ProfileBean", pb);
             response.sendRedirect("/Instagrim/Profile/" + lg.getUsername());
         }else{

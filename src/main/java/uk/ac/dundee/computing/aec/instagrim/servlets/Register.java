@@ -61,16 +61,18 @@ public class Register extends HttpServlet {
         String email=request.getParameter("email");
         String street=request.getParameter("street");
         String city=request.getParameter("city");
+        String about=request.getParameter("about");
         int postcode=Integer.parseInt(request.getParameter("postcode"));
         
         ProfileBean profile = new ProfileBean();
         profile.setFirstName(firstname);
         profile.setLastName(lastname);
         profile.setEmail(email);
+        profile.setAbout(about);
         profile.setAddress(street, city, postcode);
         
         //makes sure that the fields are not emtpy to avoid database registering a blank user
-        if(password.isEmpty() || username.isEmpty() || firstname.isEmpty() || lastname.isEmpty() || email.isEmpty() || street.isEmpty() || city.isEmpty())
+        if(password.isEmpty() || username.isEmpty() || firstname.isEmpty() || lastname.isEmpty() || email.isEmpty() || street.isEmpty() || city.isEmpty() || about.isEmpty())
         {
             response.sendRedirect("/Instagrim/Register");
         }

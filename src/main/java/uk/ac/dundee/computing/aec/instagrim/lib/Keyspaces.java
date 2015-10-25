@@ -48,7 +48,8 @@ public final class Keyspaces {
                     + "      last_name text,\n"
                     + "      email text,\n"
                     + "      addresses  map<text, frozen <address>>,\n"
-                    + "      avatar uuid\n"
+                    + "      avatar uuid,\n"
+                    + "      about text\n"
                     + "  );";
             
             String CreatePictureComments = "CREATE TABLE if not exists instagrim.piccomments (\n"

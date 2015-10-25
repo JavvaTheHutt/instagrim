@@ -150,10 +150,9 @@ public class Image extends HttpServlet {
         }
         else
         {
-        boolean profilePage = false;
         HttpSession session=request.getSession();
         LoggedIn lg= (LoggedIn)session.getAttribute("LoggedIn");
-        for (Part part : request.getParts()) {
+        Part part = request.getPart("upfile");
             System.out.println("Part Name " + part.getName());
 
             String type = part.getContentType();
@@ -171,41 +170,29 @@ public class Image extends HttpServlet {
                 System.out.println("Length : " + b.length);
                 PicModel tm = new PicModel();
                 tm.setCluster(cluster);
-                if(session.getAttribute("uploadProfile") == null)
+                if(session.getAttribute("uploadProfile").equals(false))
                 {
+                    System.out.println("entered the first condition");
                     tm.insertPic(b, type, filename, username);
-                    profilePage =false;
+                    is.close();
+                    response.sendRedirect("/Instagrim/Images/" + lg.getUsername());
                 }
                 else
                 {
+                    System.out.println("entered the second condition");
                     Avatar av = new Avatar();
                     av= tm.insertProfilePic(b, type, type, username, av);
+                    is.close();
                     session.setAttribute("Avatar", av);
                     ProfileBean pb = (ProfileBean) session.getAttribute("ProfileBean");
                     pb.setAvatar(av);
-                    session.setAttribute("uploadProfile", null);
+                    session.setAttribute("uploadProfile", false);
                     session.setAttribute("ProfileBean", pb);
-                    profilePage =true;
+                    response.sendRedirect("/Instagrim/Profile/" + lg.getUsername());
                 }
-
-                is.close();
             }
+     
         }
-            if(profilePage==false)
-            {
-//            RequestDispatcher rd = request.getRequestDispatcher("/Images/" + lg.getUsername());
-//            rd.forward(request, response);
-            response.sendRedirect("/Instagrim/Images/" + lg.getUsername());
-            }
-            else
-            {
-//            RequestDispatcher rd = request.getRequestDispatcher("/Profile/" + lg.getUsername());
-//            rd.forward(request, response);
-              response.sendRedirect("/Instagrim/Profile/" + lg.getUsername());
-            }
-        }
-        
-
     }
 
     private void error(String mess, HttpServletResponse response) throws ServletException, IOException {

@@ -9,6 +9,7 @@ public class ProfileBean {
     private String firstName= null;
     private String lastName= null;
     private String email= null;
+    private String about= null;
     private String street= null;
     private String city= null;
     private int postCode= 0;
@@ -84,6 +85,20 @@ public class ProfileBean {
     public Avatar getAvatar()
     {
         return avatar;
+    }
+
+    /**
+     * @return the about
+     */
+    public String getAbout() {
+        return about;
+    }
+
+    /**
+     * @param about the about to set
+     */
+    public void setAbout(String about) {
+        this.about = about;
     }
         
 }

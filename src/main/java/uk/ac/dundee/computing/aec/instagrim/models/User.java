@@ -83,11 +83,11 @@ public class User {
                                           .setInt("zip", profile.getPostCode());
             HashMap addressMap = new HashMap();
             addressMap.put("Home", address);
-            ps = session.prepare("insert into userprofiles (login,password,first_name,last_name,email,addresses) Values(?,?,?,?,?,?)");
+            ps = session.prepare("insert into userprofiles (login,password,first_name,last_name,email,addresses,about) Values(?,?,?,?,?,?,?)");
             boundStatement = new BoundStatement(ps);
             session.execute( // this is where the query is executed
                     boundStatement.bind( // here you are binding the 'boundStatement'
-                            username,EncodedPassword,profile.getFirstName(),profile.getLastName(),profile.getEmail(), addressMap));
+                            username,EncodedPassword,profile.getFirstName(),profile.getLastName(),profile.getEmail(), addressMap, profile.getAbout()));
             //We are assuming this always works.  Also a transaction would be good here !
             return "Success";
         }
@@ -157,6 +157,7 @@ public class User {
             profile.setFirstName(row.getString("first_name"));
             profile.setLastName(row.getString("last_name"));
             profile.setEmail(row.getString("email"));
+            profile.setAbout(row.getString("about"));
             Object[] objAddress = row.getMap("addresses", String.class, UDTValue.class).values().toArray();
             String[] strAddress = new String[2];
             int zip =0;
@@ -195,7 +196,7 @@ public class User {
         return profile;
     }
     
-    public ProfileBean UpdateProfile(ProfileBean profile, String user, String firstname, String lastname, String email) //throws Exception
+    public ProfileBean UpdateProfile(ProfileBean profile, String user, String firstname, String lastname, String email, String street, String city, int postcode, String about) //throws Exception
     {
 //       try{
         Session session = cluster.connect("instagrim");
@@ -209,9 +210,24 @@ public class User {
         ps = session.prepare("update userprofiles set email= ? where login= ?");
         bs = new BoundStatement(ps);
         session.execute(bs.bind(email, user));
+        UserType addressType = cluster.getMetadata().getKeyspace("instagrim").getUserType("address");
+        UDTValue address = addressType.newValue()
+                                      .setString("street", street)
+                                      .setString("city", city)
+                                      .setInt("zip", postcode);
+        HashMap addressMap = new HashMap();
+        addressMap.put("Home", address);
+        ps = session.prepare("update userprofiles set addresses= ? where login= ?");
+        bs = new BoundStatement(ps);
+        session.execute(bs.bind(addressMap, user));
+        ps = session.prepare("update userprofiles set about= ? where login= ?");
+        bs = new BoundStatement(ps);
+        session.execute(bs.bind(about, user));
         profile.setFirstName(firstname);
         profile.setLastName(lastname);
         profile.setEmail(email);
+        profile.setAddress(street, city, postcode);
+        profile.setAbout(about);
         return profile;
     }
     

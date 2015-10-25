@@ -8,9 +8,21 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <link rel="stylesheet" href="/Instagrim/bootstrap/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="/Instagrim/bootstrap/css/styles.css"/>
+        <link href="/Instagrim/bootstrap/css/font-awesome.min.css" rel="stylesheet">
+        <link href="/Instagrim/bootstrap/css/animate.min.css" rel="stylesheet">
+        <link href="/Instagrim/bootstrap/css/prettyPhoto.css" rel="stylesheet">
+        <link href="/Instagrim/bootstrap/css/main.css" rel="stylesheet">
+        <link href="/Instagrim/bootstrap/css/responsive.css" rel="stylesheet">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="/Instagrim/bootstrap/js/bootstrap.min.js"></script>
+        <script src="/Instagrim/bootstrap/js/jquery.prettyPhoto.js"></script>
+        <script src="/Instagrim/bootstrap/js/jquery.isotope.min.js"></script>
+        <script src="/Instagrim/bootstrap/js/main.js"></script>
+        <script src="/Instagrim/bootstrap/js/wow.min.js"></script>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Instagrim</title>
-        <link rel="stylesheet" type="text/css" href="Styles.css" />
     </head>
     <body>
         <h1>InstaGrim ! </h1>
@@ -27,7 +39,9 @@
                 File to upload: <input type="file" name="upfile"><br/>
 
                 <br/>
+                <input class="hidden" type="text" name="cameFrom" value="aUpload">
                 <input type="submit" value="Press"> to upload the file!
+                
             </form>
 
         </article>
