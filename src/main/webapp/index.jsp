@@ -59,6 +59,16 @@
                                 <li><a href="/Instagrim/Profile/<%=UserName%>">Profile</a></li>
                               </ul>
                               <ul id="rightnav" class="nav navbar-nav navbar-right">
+                                <li>
+                                    <form method="POST" role="search" action="Search">
+                                        <div id="searchBar">
+                                            <div id="searchFormGroup" class="form-group">
+                                                <input type="text" class="form-control" placeholder="Search" name="searchContent">
+                                            </div>
+                                            <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
+                                        </div>
+                                    </form>
+                                </li>
                                 <li><a href="/Instagrim/Logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
                               </ul>
                               <%}

@@ -18,6 +18,7 @@ import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.Map;
 import java.util.Set;
 import javax.servlet.http.HttpSession;
@@ -158,6 +159,7 @@ public class User {
             profile.setLastName(row.getString("last_name"));
             profile.setEmail(row.getString("email"));
             profile.setAbout(row.getString("about"));
+            profile.setUsername(user);
             Object[] objAddress = row.getMap("addresses", String.class, UDTValue.class).values().toArray();
             String[] strAddress = new String[2];
             int zip =0;
@@ -193,6 +195,8 @@ public class User {
 //       {
 //           e.printStackTrace();
 //       }
+        System.out.println(profile.getUsername());
+        System.out.println(profile.getFirstName());
         return profile;
     }
     
@@ -234,6 +238,94 @@ public class User {
     
     public void setCluster(Cluster cluster) {
         this.cluster = cluster;
+    }
+    
+    public LinkedList<ProfileBean> searchProfiles(String searchFor)
+    {
+        LinkedList<ProfileBean> lsProfiles = new LinkedList<>();
+        Session session = cluster.connect("instagrim");
+        ResultSet rs= null;
+        ResultSet rs1 = null;
+        PreparedStatement ps = session.prepare("select * from userprofiles");
+        BoundStatement bs = new BoundStatement(ps);
+        rs = session.execute(bs);
+        if(rs.isExhausted())
+        {
+            return lsProfiles;
+        }
+        else
+        {
+            for(Row row: rs)
+            {
+                ProfileBean profile = new ProfileBean();
+                profile.setUsername(row.getString("login"));
+                profile.setFirstName(row.getString("first_name"));
+                profile.setLastName(row.getString("last_name"));
+                profile.setEmail(row.getString("email"));
+                Object[] objAddress = row.getMap("addresses", String.class, UDTValue.class).values().toArray();
+                String[] strAddress = new String[2];
+                int zip =0;
+
+                try {
+                    UDTValue address = (UDTValue)objAddress[0];
+                    strAddress[0] = address.getString("street");
+                    strAddress[1] = address.getString("city");
+                    zip = address.getInt("zip");
+                }
+                catch (ArrayIndexOutOfBoundsException e) {
+
+                }
+
+                profile.setAddress(strAddress[0], strAddress[1], zip);
+                Avatar av = new Avatar();
+                if(row.getUUID("avatar")!= null)
+                {
+                    ps = session.prepare("select image,imagelength,type from pics where picid =?");
+                    bs = new BoundStatement(ps);
+                    rs1 = session.execute(bs.bind(row.getUUID("avatar")));
+                }else{
+                    rs1 = null;
+                }
+                
+                if(rs1==null)
+                {
+                    profile.setAvatar(null);
+                }
+                else
+                {
+                    Row row1 = rs1.one();
+                    av.setPic(row1.getBytes("image"), row1.getInt("imageLength"), row1.getString("type"));
+                    av.setUUID(row.getUUID("avatar"));
+                    profile.setAvatar(av);    
+                }
+                
+                if(row.getString("login").equalsIgnoreCase(searchFor))
+                {
+                    lsProfiles.add(profile);
+                    break;
+                }
+                
+                if(row.getString("first_name").equalsIgnoreCase(searchFor))
+                {
+                    lsProfiles.add(profile);
+                    break;
+                }
+                
+                if(row.getString("last_name").equalsIgnoreCase(searchFor))
+                {
+                    lsProfiles.add(profile);
+                    break;
+                }
+                
+                if((row.getString("first_name")+ " " + row.getString("last_name")).equalsIgnoreCase(searchFor))
+                {
+                    lsProfiles.add(profile);
+                    break;
+                }
+                
+            }
+            return lsProfiles;
+        }
     }
 
     

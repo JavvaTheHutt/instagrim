@@ -68,7 +68,7 @@
                             <ul>
                                 <div id="profilePic">
                                     <% if(profile.getAvatar() != null)
-                                        { System.out.println("This means avatar is not null");%>
+                                        {%>
                                             <li id="avatar"><a href="/Instagrim/Image/<%=profile.getAvatar().getSUUID()%>"><img id="avatarImg" class="img-responsive" src="/Instagrim/Image/<%=profile.getAvatar().getSUUID()%> "></a><a id="uploadText" href="/Instagrim/UploadProfile">Change Avatar <span class="glyphicon glyphicon-cloud-upload"></span></a></li><br/>
                                     <% }else{ 
                                     %>
@@ -82,7 +82,7 @@
                                 <h4 class="h4">Name:</h4>
                                         <li id="avatar"><%=profile.getFirstName() + " " + profile.getLastName()%></li>
                                 <h4 class="h4">Username:</h4>
-                                        <li id="avatar"><%=lg.getUsername()%></li>
+                                        <li id="avatar"><%=profile.getUsername()%></li>
                                 <h4 class="h4">Email:</h4>        
                                         <li id="avatar"><%=profile.getEmail()%></li>
                                 <h4 class="h4">Address:</h4>        

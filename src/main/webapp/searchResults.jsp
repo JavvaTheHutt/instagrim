@@ -26,7 +26,11 @@
         <script src="/Instagrim/bootstrap/js/main.js"></script>
         <script src="/Instagrim/bootstrap/js/wow.min.js"></script>
     </head>
-    <body>        
+    <body>
+        <% LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");
+           session.setAttribute("username", lg.getUsername());
+           ProfileBean profile = (ProfileBean) session.getAttribute("ProfileBean");
+        %>
         <div id="navbar" class="navbar navbar-inverse navbar-static-top">
             <div class="container">
               <!-- Brand and toggle get grouped for better mobile display -->
@@ -47,7 +51,7 @@
                       <ul class="nav navbar-nav">
                         <li><a href="/Instagrim/Upload">Upload</a></li>
                         <li><a href="/Instagrim/Images/<%=lg.getUsername()%>">Your Images</a></li>
-                        <li class="active"><a href="/Instagrim/Profile/<%=lg.getUsername()%>">Profile</a></li>
+                        <li><a href="/Instagrim/Profile/<%=lg.getUsername()%>">Profile</a></li>
                       </ul>
                       <ul id="rightnav" class="nav navbar-nav navbar-right">
                         <li><a href="/Instagrim/Logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
@@ -56,29 +60,39 @@
             </div><!-- /.container-fluid -->
           </div>
  
-        <article id="gallery" class="gallery">
+        
             <div class="container">
-            <h1>Your Pics</h1>
-        <%
-            java.util.LinkedList<Pic> lsPics = (java.util.LinkedList<Pic>) request.getAttribute("Pics");
-            if (lsPics == null) {
-        %>
-        <p>No Pictures found</p>
-        <%
-        } else {
-            Iterator<Pic> iterator;
-            iterator = lsPics.iterator();
-            while (iterator.hasNext()) {
-                Pic p = (Pic) iterator.next();
-
-        %>
-        <a href="/Instagrim/Image/<%=p.getSUUID()%>" ><img src="/Instagrim/Thumb/<%=p.getSUUID()%>"></a><br/><%
-
-            }
-            }
-        %>
+                <h1 class="h1">Results:</h1>
+                    <%
+                        java.util.LinkedList<ProfileBean> lsProf = (java.util.LinkedList<ProfileBean>) request.getAttribute("lsProfiles");
+                        if (lsProf.isEmpty() || lsProf == null) {
+                    %>
+                        <p>No Users Found</p>
+                    <%
+                    } else {
+                        Iterator<ProfileBean> iterator;
+                        iterator = lsProf.iterator();
+                        while (iterator.hasNext()) {
+                            ProfileBean p = (ProfileBean) iterator.next();
+                        if(p.getUsername()!= lg.getUsername())
+                        {
+                    %>
+                    <% if(p.getAvatar() != null)
+                                        {%>
+                        <a href="/Instagrim/Profile/<%=p.getUsername()%>" ><img src="/Instagrim/Image/<%=p.getAvatar().getSUUID()%>"></a>
+                     <% }else{ 
+                                    %>
+                        <a href="/Instagrim/Profile/<%=p.getUsername()%>" ><img class="img-responsive" src="/Instagrim/images/Vendetta.jpg"></a>
+                    <%}%>
+                        
+                        <a href="/Instagrim/Profile/<%=p.getUsername()%>" ><%=p.getUsername()%></a>
+                        <br/>
+                    <%
+                        }
+                        }
+                    }
+                    %>
             </div>
-        </article>
     </body>
 </html>
 
