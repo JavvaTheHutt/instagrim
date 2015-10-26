@@ -95,7 +95,9 @@
                             {%>
                             <p><%=profile.getAbout()%></p>
                             <%}%>
+                            <%if(profile.getUsername().equals(lg.getUsername())){%>
                             <a href="/Instagrim/Update/<%=lg.getUsername()%>">update profile</a>
+                            <%}%>
                         </div>
                     </div>
            </div>

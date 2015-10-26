@@ -93,7 +93,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label>About:</label>
-                                    <textarea class="form-control" type="text" name="about" value="<%=profile.getAbout()%>"></textarea>
+                                    <textarea class="form-control" type="text" name="about"><%=profile.getAbout()%></textarea>
                                 </div>
                                     <button  type="submit" class="btn btn-primary">Update Profile</button>
                                     <input class="hidden" type="text" name="page" value="Update">

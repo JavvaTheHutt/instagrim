@@ -121,7 +121,15 @@ public class Profile extends HttpServlet {
     protected void DisplayUpdate(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
     {
+        String args[] = Convertors.SplitRequestPath(request);
+        HttpSession session = request.getSession();
+        User us = new User();
+        us.setCluster(cluster);
+        ProfileBean profile = new ProfileBean();
+        Avatar av = new Avatar();
+        profile = us.getProfile(profile,args[2], av);
         RequestDispatcher rd = request.getRequestDispatcher("/updateProfile.jsp");
+        session.setAttribute("ProfileBean", profile);
         rd.forward(request, response);
     }
     
