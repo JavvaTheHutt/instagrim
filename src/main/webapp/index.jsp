@@ -55,7 +55,7 @@
                               %>
                               <ul class="nav navbar-nav">
                                 <li><a href="/Instagrim/Upload">Upload</a></li>
-                                <li><a href="/Instagrim/Images/<%=UserName%>">Your Images</a></li>
+                                <li><a href="/Instagrim/Images/<%=UserName%>">Images</a></li>
                                 <li><a href="/Instagrim/Profile/<%=UserName%>">Profile</a></li>
                               </ul>
                               <ul id="rightnav" class="nav navbar-nav navbar-right">

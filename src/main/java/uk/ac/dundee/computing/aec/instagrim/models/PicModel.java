@@ -29,6 +29,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.UUID;
 import javax.imageio.ImageIO;
@@ -234,6 +235,39 @@ public class PicModel {
         return Pics;
     }
     
+    public java.util.LinkedList<Pic> getPicsForProfile(String User) {
+        int count = 0;
+        java.util.LinkedList<Pic> Pics = new java.util.LinkedList<>();
+        java.util.LinkedList<Pic> lsPics = new java.util.LinkedList<>();
+        Session session = cluster.connect("instagrim");
+        PreparedStatement ps = session.prepare("select picid from userpiclist where user =?");
+        ResultSet rs = null;
+        BoundStatement boundStatement = new BoundStatement(ps);
+        rs = session.execute( // this is where the query is executed
+                boundStatement.bind( // here you are binding the 'boundStatement'
+                        User));
+        if (rs.isExhausted()) {
+            System.out.println("No Images returned");
+            return null;
+        } else {
+            for (Row row : rs) {
+                Pic pic = new Pic();
+                java.util.UUID UUID = row.getUUID("picid");
+                System.out.println("UUID" + UUID.toString());
+                pic.setUUID(UUID);
+                Pics.add(pic);
+            } 
+            Iterator<Pic> iterator;
+            iterator = Pics.iterator();
+            while (iterator.hasNext() && count<3) {
+                    count++;
+                    Pic pic = (Pic) iterator.next();
+                    lsPics.add(pic);
+            }
+        }
+        return lsPics;
+    }
+    
     public java.util.LinkedList<Comment> getComments(){
         LinkedList<Comment> comments = new LinkedList<>();
         Session session = cluster.connect("instagrim");
@@ -322,6 +356,49 @@ public class PicModel {
         PreparedStatement ps = session.prepare("insert into piccomments (commentid, comment, picid, user) values(?,?,?,?)");
         BoundStatement bs = new BoundStatement(ps);
         session.execute(bs.bind(commentid,comment,pictureID,username));    
+    }
+    
+    public void DeletePic(String username, String picid)
+    {
+        Session session = cluster.connect("instagrim");
+        Convertors convertor = new Convertors();
+        UUID pictureID = UUID.fromString(picid);
+        ResultSet rs = null;
+        PreparedStatement ps = session.prepare("delete from Pics where picid=?");
+        BoundStatement bs = new BoundStatement(ps);
+        session.execute(bs.bind(pictureID));
+        ps = session.prepare("select * from userpiclist");
+        bs = new BoundStatement(ps);
+        rs =session.execute(bs);
+        for(Row row:rs)
+        {
+            if(row.getUUID("picid").equals(pictureID))
+            {
+                ps = session.prepare("delete from userpiclist where user=? and pic_added=?");
+                bs = new BoundStatement(ps);
+                session.execute(bs.bind(username, row.getDate("pic_added")));
+            }
+        }
+        ps = session.prepare("select * from piccomments");
+        bs = new BoundStatement(ps);
+        rs =session.execute(bs);
+        for(Row row:rs)
+        {
+            if(row.getUUID("picid").equals(pictureID))
+            {
+                ps = session.prepare("delete from piccomments where commentid=?");
+                bs = new BoundStatement(ps);
+                session.execute(bs.bind(row.getUUID("commentid")));
+            }
+        }
+    }
+    
+    public void removeAvatar(String username)
+    {
+        Session session = cluster.connect("instagrim");
+        PreparedStatement ps = session.prepare("update userprofiles set avatar=? where login=?");
+        BoundStatement bs = new BoundStatement(ps);
+        session.execute(bs.bind(null, username));
     }
 
 }

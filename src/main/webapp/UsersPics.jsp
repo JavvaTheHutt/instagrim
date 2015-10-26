@@ -4,6 +4,7 @@
     Author     : Administrator
 --%>
 
+<%@page import="uk.ac.dundee.computing.aec.instagrim.lib.Convertors"%>
 <%@page import="java.util.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="uk.ac.dundee.computing.aec.instagrim.stores.*" %>
@@ -28,31 +29,36 @@
     </head>
     <body>
         <%  LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");
+            boolean owner = (boolean) session.getAttribute("Owner");
             %>
         <div id="navbar" class="navbar navbar-inverse navbar-static-top">
-                    <div class="container">
-                      <!-- Brand and toggle get grouped for better mobile display -->
-                      <div id="navHead" class="navbar-header">
-                        <a id="brand" class="navbar-brand" href="/Instagrim/">Instagrim</a>
-                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                          <span class="sr-only">Toggle navigation</span>
-                          <span class="icon-bar"></span>
-                          <span class="icon-bar"></span>
-                          <span class="icon-bar"></span>
-                        </button>
-                          
-                      </div>
-                            
+            <div class="container">
+              <!-- Brand and toggle get grouped for better mobile display -->
+              <div id="navHead" class="navbar-header">
+                <a id="brand" class="navbar-brand" href="/Instagrim/">Instagrim</a>
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                </button>
 
-                      <!-- Collect the nav links, forms, and other content for toggling -->
-                      <div class="collapse navbar-collapse">
-            <ul class="nav navbar-nav">
-                <li><a href="/Instagrim/Upload">Upload</a></li>
-                <li><a href="/Instagrim/Images/majed">Sample Images</a></li>
-            </ul>
-        </div>
-                    </div>
-        </div>
+              </div>
+
+
+              <!-- Collect the nav links, forms, and other content for toggling -->
+              <div class="collapse navbar-collapse">
+                      <ul class="nav navbar-nav">
+                        <li><a href="/Instagrim/Upload">Upload</a></li>
+                        <li class="active"><a href="/Instagrim/Images/<%=lg.getUsername()%>">Images</a></li>
+                        <li><a href="/Instagrim/Profile/<%=lg.getUsername()%>">Profile</a></li>
+                      </ul>
+                      <ul id="rightnav" class="nav navbar-nav navbar-right">
+                        <li><a href="/Instagrim/Logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+                      </ul>
+              </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+          </div>
  
         <article id="gallery" class="gallery">
         <div id="ImagesConatainer" class="container">
@@ -72,7 +78,16 @@
 
         %>
         <a href="/Instagrim/Image/<%=p.getSUUID()%>" ><img id="userImage" src="/Instagrim/Image/<%=p.getSUUID()%>"></a>
-        <% if (lsComments == null) {}else{
+        <%
+        if(owner)
+        {%>
+        <form class="form-horizontal" method="POST"  role="form">
+                    <button id="deleteButton"  type="submit" class="btn btn-primary">Delete Image</button>
+                    <input class="hidden" type="text" name="picid" value="<%=p.getSUUID()%>">
+                    <input class="hidden" type="text" name="cameFrom" value="DeletePhoto">
+        </form>
+                    <% session.setAttribute("Owner", false);
+        } if (lsComments == null) {}else{
             Iterator<Comment> iterator2;
             iterator2 = lsComments.iterator();
             while (iterator2.hasNext()) {

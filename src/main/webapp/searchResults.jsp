@@ -50,10 +50,20 @@
               <div class="collapse navbar-collapse">
                       <ul class="nav navbar-nav">
                         <li><a href="/Instagrim/Upload">Upload</a></li>
-                        <li><a href="/Instagrim/Images/<%=lg.getUsername()%>">Your Images</a></li>
+                        <li><a href="/Instagrim/Images/<%=lg.getUsername()%>">Images</a></li>
                         <li><a href="/Instagrim/Profile/<%=lg.getUsername()%>">Profile</a></li>
                       </ul>
                       <ul id="rightnav" class="nav navbar-nav navbar-right">
+                        <li>
+                            <form method="POST" role="search" action="Search">
+                                <div id="searchBar">
+                                    <div id="searchFormGroup" class="form-group">
+                                        <input type="text" class="form-control" placeholder="Search" name="searchContent">
+                                    </div>
+                                    <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
+                                </div>
+                            </form>
+                        </li>
                         <li><a href="/Instagrim/Logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
                       </ul>
               </div><!-- /.navbar-collapse -->

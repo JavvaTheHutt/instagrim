@@ -20,6 +20,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import uk.ac.dundee.computing.aec.instagrim.stores.LoggedIn;
 
@@ -27,7 +28,26 @@ import uk.ac.dundee.computing.aec.instagrim.stores.LoggedIn;
  *
  * @author Administrator
  */
-@WebFilter(filterName = "ProtectPages", urlPatterns = {"/upload.jsp"}, dispatcherTypes = {DispatcherType.REQUEST, DispatcherType.FORWARD, DispatcherType.INCLUDE})
+@WebFilter(filterName = "ProtectPages", urlPatterns = {"/upload.jsp", 
+    "/UserPics.jsp", 
+    "/profile.jsp", 
+    "/searchResults.jsp", 
+    "/UpdateProfile.jsp", 
+    "/Register", 
+    "/Comments", 
+    "/Image",
+    "/Image/*",
+    "/Thumb/*",
+    "/Images",
+    "/Images/*",
+    "/Logout",
+    "/Profile",
+    "/Profile/*",
+    "/Update",
+    "/Update/*",
+    "/Search",
+    "/Upload",
+    "/UploadProfile"}, dispatcherTypes = {DispatcherType.REQUEST, DispatcherType.FORWARD, DispatcherType.INCLUDE})
 public class ProtectPages implements Filter {
     
     private static final boolean debug = true;
@@ -118,8 +138,10 @@ public class ProtectPages implements Filter {
         System.out.println("Session in filter "+session);
         if ((li == null)  || (li.getlogedin()==false)){
                System.out.println("Foward to login");
-                RequestDispatcher rd=request.getRequestDispatcher("/login.jsp");
-		rd.forward(request,response);
+                HttpServletResponse httpResponse =(HttpServletResponse) response;
+                httpResponse.sendRedirect("/Instagrim/Login");
+//                RequestDispatcher rd=request.getRequestDispatcher("/login.jsp");
+//		rd.forward(request,response);
 
             
         }

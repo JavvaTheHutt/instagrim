@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import uk.ac.dundee.computing.aec.instagrim.lib.CassandraHosts;
 import uk.ac.dundee.computing.aec.instagrim.lib.Convertors;
+import uk.ac.dundee.computing.aec.instagrim.models.PicModel;
 import uk.ac.dundee.computing.aec.instagrim.models.User;
 import uk.ac.dundee.computing.aec.instagrim.stores.*;
 
@@ -113,7 +114,11 @@ public class Profile extends HttpServlet {
         ProfileBean profile = new ProfileBean();
         Avatar av = new Avatar();
         profile = us.getProfile(profile,args[2], av);
+        PicModel tm = new PicModel();
+        tm.setCluster(cluster);
+        java.util.LinkedList<Pic> lsPics = tm.getPicsForProfile(args[2]);
         RequestDispatcher rd = request.getRequestDispatcher("/profile.jsp");
+        request.setAttribute("Pics", lsPics);
         session.setAttribute("ProfileBean", profile);
         rd.forward(request, response);
     }

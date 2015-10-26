@@ -8,6 +8,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.HashMap;
+import java.util.UUID;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -102,6 +103,12 @@ public class Image extends HttpServlet {
         tm.setCluster(cluster);
         java.util.LinkedList<Pic> lsPics = tm.getPicsForUser(User);
         java.util.LinkedList<Comment> lsComment = tm.getComments();
+        HttpSession session = request.getSession();
+        LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");
+        if(lg.getUsername().equals(User));
+        {
+            session.setAttribute("Owner", true);
+        }
         RequestDispatcher rd = request.getRequestDispatcher("/UsersPics.jsp");
         request.setAttribute("Pics", lsPics);
         request.setAttribute("Comments", lsComment);
@@ -147,6 +154,26 @@ public class Image extends HttpServlet {
                 pm.addComment(comment, picid, username);
                 response.sendRedirect("/Instagrim/Images/" + args[2]);
             }
+        }
+        else if(cameFrom.equals("DeletePhoto"))
+        {
+            String args[] = Convertors.SplitRequestPath(request);
+            HttpSession session = request.getSession();
+            LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");
+            ProfileBean pb = (ProfileBean) session.getAttribute("ProfileBean");
+            String username = lg.getUsername();
+            String picid = request.getParameter("picid");
+            PicModel pm = new PicModel();
+            pm.setCluster(cluster);
+            System.out.println("THE PROFILE BEAN AVATAR " +  pb.getAvatar().getSUUID());
+            if(picid.equals(pb.getAvatar().getSUUID()))
+            {
+                pb.setAvatar(null);
+                pm.removeAvatar(username);
+            }
+            pm.DeletePic(username, picid);
+            session.setAttribute("ProfileBean", pb);
+            response.sendRedirect("/Instagrim/Images/" + args[2]);
         }
         else
         {

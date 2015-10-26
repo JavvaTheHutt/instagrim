@@ -278,6 +278,7 @@ public class User {
 
                 profile.setAddress(strAddress[0], strAddress[1], zip);
                 Avatar av = new Avatar();
+                System.out.println(row.getUUID("avatar"));
                 if(row.getUUID("avatar")!= null)
                 {
                     ps = session.prepare("select image,imagelength,type from pics where picid =?");
