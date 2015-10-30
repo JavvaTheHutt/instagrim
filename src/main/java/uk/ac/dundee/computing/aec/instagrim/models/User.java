@@ -303,25 +303,15 @@ public class User {
                 if(row.getString("login").equalsIgnoreCase(searchFor))
                 {
                     lsProfiles.add(profile);
-                    break;
-                }
-                
-                if(row.getString("first_name").equalsIgnoreCase(searchFor))
+                }else if(row.getString("first_name").equalsIgnoreCase(searchFor))
                 {
                     lsProfiles.add(profile);
-                    break;
-                }
-                
-                if(row.getString("last_name").equalsIgnoreCase(searchFor))
+                }else if(row.getString("last_name").equalsIgnoreCase(searchFor))
                 {
                     lsProfiles.add(profile);
-                    break;
-                }
-                
-                if((row.getString("first_name")+ " " + row.getString("last_name")).equalsIgnoreCase(searchFor))
+                }else if((row.getString("first_name")+ " " + row.getString("last_name")).equalsIgnoreCase(searchFor))
                 {
                     lsProfiles.add(profile);
-                    break;
                 }
                 
             }
