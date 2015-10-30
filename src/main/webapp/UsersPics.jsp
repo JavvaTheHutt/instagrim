@@ -62,7 +62,7 @@
  
         <article id="gallery" class="gallery">
         <div id="ImagesConatainer" class="container">
-            <h3 class="h3">Your Pictures</h3>
+            <h3 class="h3">Pictures</h3>
         <%
             java.util.LinkedList<Pic> lsPics = (java.util.LinkedList<Pic>) request.getAttribute("Pics");
             java.util.LinkedList<Comment> lsComments = (java.util.LinkedList<Comment>) request.getAttribute("Comments");
