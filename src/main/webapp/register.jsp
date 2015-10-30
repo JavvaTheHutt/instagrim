@@ -8,21 +8,27 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <link rel="stylesheet" href="/InstaGeezAnA/bootstrap/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="/InstaGeezAnA/bootstrap/css/styles.css"/>
+        <link href="/InstaGeezAnA/bootstrap/css/font-awesome.min.css" rel="stylesheet">
+        <link href="/InstaGeezAnA/bootstrap/css/animate.min.css" rel="stylesheet">
+        <link href="/InstaGeezAnA/bootstrap/css/prettyPhoto.css" rel="stylesheet">
+        <link href="/InstaGeezAnA/bootstrap/css/main.css" rel="stylesheet">
+        <link href="/InstaGeezAnA/bootstrap/css/responsive.css" rel="stylesheet">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="/InstaGeezAnA/bootstrap/js/bootstrap.min.js"></script>
+        <script src="/InstaGeezAnA/bootstrap/js/jquery.prettyPhoto.js"></script>
+        <script src="/InstaGeezAnA/bootstrap/js/jquery.isotope.min.js"></script>
+        <script src="/InstaGeezAnA/bootstrap/js/main.js"></script>
+        <script src="/InstaGeezAnA/bootstrap/js/wow.min.js"></script>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>InstaGeezAnA</title>
-        <link rel="stylesheet" type="text/css" href="Styles.css" />
     </head>
     <body>
         <header>
         <h1>InstaGeezAnA ! </h1>
         <h2>Your world in Black and White</h2>
         </header>
-        <nav>
-            <ul>
-                
-                <li><a href="/InstaGeezAnA/Images/majed">Sample Images</a></li>
-            </ul>
-        </nav>
        
         <article>
             <h3>Register as user</h3>

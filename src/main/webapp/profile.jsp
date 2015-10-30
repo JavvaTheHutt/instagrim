@@ -58,7 +58,7 @@
                       </ul>
                       <ul id="rightnav" class="nav navbar-nav navbar-right">
                         <li>
-                            <form method="POST" role="search" action="Search">
+                            <form method="POST" role="search" action="/InstaGeezAnA/Search">
                                 <div id="searchBar">
                                     <div id="searchFormGroup" class="form-group">
                                         <input type="text" class="form-control" placeholder="Search" name="searchContent">
