@@ -127,7 +127,7 @@
                         </div>
                         <%
                         } else {
-                        %><h3 class="h3">Recent Pictures</h3><%
+                                %><h3 class="h3">Recent Pictures</h3> <a href="/InstaGeezAnA/Image/<%=profile.getUsername() %>">All Images</a>
                             Iterator<Pic> iterator;
                             iterator = lsPics.iterator();
                             while (iterator.hasNext()) {
