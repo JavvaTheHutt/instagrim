@@ -22,7 +22,7 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import uk.ac.dundee.computing.aec.instagrim.stores.LoggedIn;
+import uk.ac.dundee.computing.aec.InstaGeezAnA.stores.LoggedIn;
 
 /**
  *
@@ -33,7 +33,6 @@ import uk.ac.dundee.computing.aec.instagrim.stores.LoggedIn;
     "/profile.jsp", 
     "/searchResults.jsp", 
     "/UpdateProfile.jsp", 
-    "/Register", 
     "/Comments", 
     "/Image",
     "/Image/*",
@@ -139,7 +138,7 @@ public class ProtectPages implements Filter {
         if ((li == null)  || (li.getlogedin()==false)){
                System.out.println("Foward to login");
                 HttpServletResponse httpResponse =(HttpServletResponse) response;
-                httpResponse.sendRedirect("/Instagrim/Login");
+                httpResponse.sendRedirect("/InstaGeezAnA/Login");
 //                RequestDispatcher rd=request.getRequestDispatcher("/login.jsp");
 //		rd.forward(request,response);
 

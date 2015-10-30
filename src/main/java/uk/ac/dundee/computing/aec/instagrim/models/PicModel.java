@@ -1,4 +1,4 @@
-package uk.ac.dundee.computing.aec.instagrim.models;
+package uk.ac.dundee.computing.aec.InstaGeezAnA.models;
 
 /*
  * Expects a cassandra columnfamily defined as
@@ -36,10 +36,10 @@ import javax.imageio.ImageIO;
 import static org.imgscalr.Scalr.*;
 import org.imgscalr.Scalr.Method;
 
-import uk.ac.dundee.computing.aec.instagrim.lib.*;
-import uk.ac.dundee.computing.aec.instagrim.stores.Avatar;
-import uk.ac.dundee.computing.aec.instagrim.stores.Comment;
-import uk.ac.dundee.computing.aec.instagrim.stores.Pic;
+import uk.ac.dundee.computing.aec.InstaGeezAnA.lib.*;
+import uk.ac.dundee.computing.aec.InstaGeezAnA.stores.Avatar;
+import uk.ac.dundee.computing.aec.InstaGeezAnA.stores.Comment;
+import uk.ac.dundee.computing.aec.InstaGeezAnA.stores.Pic;
 //import uk.ac.dundee.computing.aec.stores.TweetStore;
 
 public class PicModel {
@@ -64,8 +64,8 @@ public class PicModel {
             java.util.UUID picid = convertor.getTimeUUID();
             
             //The following is a quick and dirty way of doing this, will fill the disk quickly !
-            Boolean success = (new File("/var/tmp/instagrim/")).mkdirs();
-            FileOutputStream output = new FileOutputStream(new File("/var/tmp/instagrim/" + picid));
+            Boolean success = (new File("/var/tmp/InstaGeezAnA/")).mkdirs();
+            FileOutputStream output = new FileOutputStream(new File("/var/tmp/InstaGeezAnA/" + picid));
 
             output.write(b);
             byte []  thumbb = picresize(picid.toString(),types[1], "");
@@ -74,7 +74,7 @@ public class PicModel {
             byte[] processedb = picdecolour(picid.toString(),types[1], "");
             ByteBuffer processedbuf=ByteBuffer.wrap(processedb);
             int processedlength=processedb.length;
-            Session session = cluster.connect("instagrim");
+            Session session = cluster.connect("InstaGeezAnA");
 
             PreparedStatement psInsertPic = session.prepare("insert into pics ( picid, image,thumb,processed, user, interaction_time,imagelength,thumblength,processedlength,type,name) values(?,?,?,?,?,?,?,?,?,?,?)");
             PreparedStatement psInsertPicToUser = session.prepare("insert into userpiclist ( picid, user, pic_added) values(?,?,?)");
@@ -101,8 +101,8 @@ public class PicModel {
             java.util.UUID picid = convertor.getTimeUUID();
             
             //The following is a quick and dirty way of doing this, will fill the disk quickly !
-            Boolean success = (new File("/var/tmp/instagrim/")).mkdirs();
-            FileOutputStream output = new FileOutputStream(new File("/var/tmp/instagrim/" + picid));
+            Boolean success = (new File("/var/tmp/InstaGeezAnA/")).mkdirs();
+            FileOutputStream output = new FileOutputStream(new File("/var/tmp/InstaGeezAnA/" + picid));
 
             output.write(b);
             byte []  thumbb = picresize(picid.toString(),types[1], "original");
@@ -111,7 +111,7 @@ public class PicModel {
             byte[] processedb = picdecolour(picid.toString(),types[1], "original");
             ByteBuffer processedbuf=ByteBuffer.wrap(processedb);
             int processedlength=processedb.length;
-            Session session = cluster.connect("instagrim");
+            Session session = cluster.connect("InstaGeezAnA");
 
             PreparedStatement psInsertPic = session.prepare("insert into pics ( picid, image,thumb,processed, user, interaction_time,imagelength,thumblength,processedlength,type,name) values(?,?,?,?,?,?,?,?,?,?,?)");
             PreparedStatement psInsertPicToUser = session.prepare("insert into userpiclist ( picid, user, pic_added) values(?,?,?)");
@@ -139,7 +139,7 @@ public class PicModel {
 
     public byte[] picresize(String picid,String type, String filter) {
         try {
-            BufferedImage BI = ImageIO.read(new File("/var/tmp/instagrim/" + picid));
+            BufferedImage BI = ImageIO.read(new File("/var/tmp/InstaGeezAnA/" + picid));
             BufferedImage thumbnail = createThumbnail(BI, filter);
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             ImageIO.write(thumbnail, type, baos);
@@ -156,7 +156,7 @@ public class PicModel {
     
     public byte[] picdecolour(String picid,String type, String filter) {
         try {
-            BufferedImage BI = ImageIO.read(new File("/var/tmp/instagrim/" + picid));
+            BufferedImage BI = ImageIO.read(new File("/var/tmp/InstaGeezAnA/" + picid));
             BufferedImage processed = createProcessed(BI, filter);
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             ImageIO.write(processed, type, baos);
@@ -210,7 +210,7 @@ public class PicModel {
    
     public java.util.LinkedList<Pic> getPicsForUser(String User) {
         java.util.LinkedList<Pic> Pics = new java.util.LinkedList<>();
-        Session session = cluster.connect("instagrim");
+        Session session = cluster.connect("InstaGeezAnA");
         PreparedStatement ps = session.prepare("select picid from userpiclist where user =?");
         ResultSet rs = null;
         BoundStatement boundStatement = new BoundStatement(ps);
@@ -239,7 +239,7 @@ public class PicModel {
         int count = 0;
         java.util.LinkedList<Pic> Pics = new java.util.LinkedList<>();
         java.util.LinkedList<Pic> lsPics = new java.util.LinkedList<>();
-        Session session = cluster.connect("instagrim");
+        Session session = cluster.connect("InstaGeezAnA");
         PreparedStatement ps = session.prepare("select picid from userpiclist where user =?");
         ResultSet rs = null;
         BoundStatement boundStatement = new BoundStatement(ps);
@@ -270,7 +270,7 @@ public class PicModel {
     
     public java.util.LinkedList<Comment> getComments(){
         LinkedList<Comment> comments = new LinkedList<>();
-        Session session = cluster.connect("instagrim");
+        Session session = cluster.connect("InstaGeezAnA");
         PreparedStatement ps = session.prepare("select * from piccomments");
         ResultSet rs = null;
         BoundStatement bs = new BoundStatement(ps);
@@ -292,7 +292,7 @@ public class PicModel {
     }
 
     public Pic getPic(int image_type, java.util.UUID picid) {
-        Session session = cluster.connect("instagrim");
+        Session session = cluster.connect("InstaGeezAnA");
         ByteBuffer bImage = null;
         String type = null;
         int length = 0;
@@ -349,7 +349,7 @@ public class PicModel {
     
     public void addComment(String comment, String picid, String username)
     {
-        Session session = cluster.connect("instagrim");
+        Session session = cluster.connect("InstaGeezAnA");
         Convertors convertor = new Convertors();
         UUID commentid = convertor.getTimeUUID();
         UUID pictureID = UUID.fromString(picid);
@@ -360,7 +360,7 @@ public class PicModel {
     
     public void DeletePic(String username, String picid)
     {
-        Session session = cluster.connect("instagrim");
+        Session session = cluster.connect("InstaGeezAnA");
         Convertors convertor = new Convertors();
         UUID pictureID = UUID.fromString(picid);
         ResultSet rs = null;
@@ -395,7 +395,7 @@ public class PicModel {
     
     public void removeAvatar(String username)
     {
-        Session session = cluster.connect("instagrim");
+        Session session = cluster.connect("InstaGeezAnA");
         PreparedStatement ps = session.prepare("update userprofiles set avatar=? where login=?");
         BoundStatement bs = new BoundStatement(ps);
         session.execute(bs.bind(null, username));

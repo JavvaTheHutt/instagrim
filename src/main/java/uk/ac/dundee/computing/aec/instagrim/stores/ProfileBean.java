@@ -1,4 +1,4 @@
-package uk.ac.dundee.computing.aec.instagrim.stores;
+package uk.ac.dundee.computing.aec.InstaGeezAnA.stores;
 
 /**
  *

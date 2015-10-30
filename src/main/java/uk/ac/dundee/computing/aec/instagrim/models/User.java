@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package uk.ac.dundee.computing.aec.instagrim.models;
+package uk.ac.dundee.computing.aec.InstaGeezAnA.models;
 
 import com.datastax.driver.core.BoundStatement;
 import com.datastax.driver.core.Cluster;
@@ -22,10 +22,10 @@ import java.util.LinkedList;
 import java.util.Map;
 import java.util.Set;
 import javax.servlet.http.HttpSession;
-import uk.ac.dundee.computing.aec.instagrim.lib.AeSimpleSHA1;
-import uk.ac.dundee.computing.aec.instagrim.stores.Avatar;
-import uk.ac.dundee.computing.aec.instagrim.stores.Pic;
-import uk.ac.dundee.computing.aec.instagrim.stores.ProfileBean;
+import uk.ac.dundee.computing.aec.InstaGeezAnA.lib.AeSimpleSHA1;
+import uk.ac.dundee.computing.aec.InstaGeezAnA.stores.Avatar;
+import uk.ac.dundee.computing.aec.InstaGeezAnA.stores.Pic;
+import uk.ac.dundee.computing.aec.InstaGeezAnA.stores.ProfileBean;
 
 /**
  *
@@ -48,7 +48,7 @@ public class User {
             return "PasswordFail";
         }
         //connecting to the keyspace in cassandra so we know which database to reference
-        Session session = cluster.connect("instagrim");
+        Session session = cluster.connect("InstaGeezAnA");
         //selecting all userprofiles from the database that have the login provided by the user
         PreparedStatement ps = session.prepare("select * from userprofiles where login =?");
         //selecting all userprofiles from the database that have the email provided by the user
@@ -77,7 +77,7 @@ public class User {
         //if statement to check that the username and password checks came back as empty to insert the new user
         if(rs.isExhausted() && emailValidation==true)
         {
-            UserType addressType = cluster.getMetadata().getKeyspace("instagrim").getUserType("address");
+            UserType addressType = cluster.getMetadata().getKeyspace("InstaGeezAnA").getUserType("address");
             UDTValue address = addressType.newValue()
                                           .setString("street", profile.getStreet())
                                           .setString("city", profile.getCity())
@@ -115,7 +115,7 @@ public class User {
             System.out.println("Can't check your password");
             return false;
         }
-        Session session = cluster.connect("instagrim");
+        Session session = cluster.connect("InstaGeezAnA");
         PreparedStatement ps = session.prepare("select * from userprofiles where login =?");
         ResultSet rs = null;
         BoundStatement boundStatement = new BoundStatement(ps);
@@ -139,7 +139,7 @@ public class User {
     public ProfileBean getProfile(ProfileBean profile, String user, Avatar av) //throws Exception
     {
 //       try{
-        Session session = cluster.connect("instagrim");
+        Session session = cluster.connect("InstaGeezAnA");
         PreparedStatement ps = session.prepare("select * from userprofiles where login=?");
         ResultSet rs = null;
         ResultSet rs1 = null;
@@ -203,7 +203,7 @@ public class User {
     public ProfileBean UpdateProfile(ProfileBean profile, String user, String firstname, String lastname, String email, String street, String city, int postcode, String about) //throws Exception
     {
 //       try{
-        Session session = cluster.connect("instagrim");
+        Session session = cluster.connect("InstaGeezAnA");
 
         PreparedStatement ps = session.prepare("update userprofiles set first_name= ? where login= ?");
         BoundStatement bs = new BoundStatement(ps);
@@ -214,7 +214,7 @@ public class User {
         ps = session.prepare("update userprofiles set email= ? where login= ?");
         bs = new BoundStatement(ps);
         session.execute(bs.bind(email, user));
-        UserType addressType = cluster.getMetadata().getKeyspace("instagrim").getUserType("address");
+        UserType addressType = cluster.getMetadata().getKeyspace("InstaGeezAnA").getUserType("address");
         UDTValue address = addressType.newValue()
                                       .setString("street", street)
                                       .setString("city", city)
@@ -243,7 +243,7 @@ public class User {
     public LinkedList<ProfileBean> searchProfiles(String searchFor)
     {
         LinkedList<ProfileBean> lsProfiles = new LinkedList<>();
-        Session session = cluster.connect("instagrim");
+        Session session = cluster.connect("InstaGeezAnA");
         ResultSet rs= null;
         ResultSet rs1 = null;
         PreparedStatement ps = session.prepare("select * from userprofiles");

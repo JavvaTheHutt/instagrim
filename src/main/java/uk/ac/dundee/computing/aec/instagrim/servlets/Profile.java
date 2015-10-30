@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package uk.ac.dundee.computing.aec.instagrim.servlets;
+package uk.ac.dundee.computing.aec.InstaGeezAnA.servlets;
 
 import com.datastax.driver.core.Cluster;
 import java.io.IOException;
@@ -17,11 +17,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import uk.ac.dundee.computing.aec.instagrim.lib.CassandraHosts;
-import uk.ac.dundee.computing.aec.instagrim.lib.Convertors;
-import uk.ac.dundee.computing.aec.instagrim.models.PicModel;
-import uk.ac.dundee.computing.aec.instagrim.models.User;
-import uk.ac.dundee.computing.aec.instagrim.stores.*;
+import uk.ac.dundee.computing.aec.InstaGeezAnA.lib.CassandraHosts;
+import uk.ac.dundee.computing.aec.InstaGeezAnA.lib.Convertors;
+import uk.ac.dundee.computing.aec.InstaGeezAnA.models.PicModel;
+import uk.ac.dundee.computing.aec.InstaGeezAnA.models.User;
+import uk.ac.dundee.computing.aec.InstaGeezAnA.stores.*;
 
 /**
  *
@@ -98,7 +98,7 @@ public class Profile extends HttpServlet {
             LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");
             pb = us.UpdateProfile(pb, lg.getUsername(), firstname, lastname, email, street, city, postcode, about);
             session.setAttribute("ProfileBean", pb);
-            response.sendRedirect("/Instagrim/Profile/" + lg.getUsername());
+            response.sendRedirect("/InstaGeezAnA/Profile/" + lg.getUsername());
         }else{
             
         }

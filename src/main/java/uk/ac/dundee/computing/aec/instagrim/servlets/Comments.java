@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package uk.ac.dundee.computing.aec.instagrim.servlets;
+package uk.ac.dundee.computing.aec.InstaGeezAnA.servlets;
 
 import com.datastax.driver.core.Cluster;
 import java.io.IOException;
@@ -14,9 +14,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import uk.ac.dundee.computing.aec.instagrim.lib.CassandraHosts;
-import uk.ac.dundee.computing.aec.instagrim.lib.Convertors;
-import uk.ac.dundee.computing.aec.instagrim.models.PicModel;
+import uk.ac.dundee.computing.aec.InstaGeezAnA.lib.CassandraHosts;
+import uk.ac.dundee.computing.aec.InstaGeezAnA.lib.Convertors;
+import uk.ac.dundee.computing.aec.InstaGeezAnA.models.PicModel;
 
 /**
  *
@@ -51,7 +51,7 @@ public class Comments extends HttpServlet {
         
         if(comment.isEmpty())
         {
-            response.sendRedirect("/Instagrim/Images/" + args[2]);
+            response.sendRedirect("/InstaGeezAnA/Images/" + args[2]);
         }else{
             
         }

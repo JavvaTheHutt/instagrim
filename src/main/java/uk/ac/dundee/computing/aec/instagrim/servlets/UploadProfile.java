@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package uk.ac.dundee.computing.aec.instagrim.servlets;
+package uk.ac.dundee.computing.aec.InstaGeezAnA.servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -36,7 +36,7 @@ public class UploadProfile extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session =request.getSession();
         session.setAttribute("uploadProfile", true);
-        response.sendRedirect("/Instagrim/Upload");
+        response.sendRedirect("/InstaGeezAnA/Upload");
     }
 
     /**

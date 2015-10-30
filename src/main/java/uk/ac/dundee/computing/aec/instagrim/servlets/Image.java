@@ -1,4 +1,4 @@
-package uk.ac.dundee.computing.aec.instagrim.servlets;
+package uk.ac.dundee.computing.aec.InstaGeezAnA.servlets;
 
 import com.datastax.driver.core.Cluster;
 import java.io.BufferedInputStream;
@@ -23,14 +23,14 @@ import org.apache.commons.fileupload.FileItemIterator;
 import org.apache.commons.fileupload.FileItemStream;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.fileupload.util.Streams;
-import uk.ac.dundee.computing.aec.instagrim.lib.CassandraHosts;
-import uk.ac.dundee.computing.aec.instagrim.lib.Convertors;
-import uk.ac.dundee.computing.aec.instagrim.models.PicModel;
-import uk.ac.dundee.computing.aec.instagrim.stores.Avatar;
-import uk.ac.dundee.computing.aec.instagrim.stores.Comment;
-import uk.ac.dundee.computing.aec.instagrim.stores.LoggedIn;
-import uk.ac.dundee.computing.aec.instagrim.stores.Pic;
-import uk.ac.dundee.computing.aec.instagrim.stores.ProfileBean;
+import uk.ac.dundee.computing.aec.InstaGeezAnA.lib.CassandraHosts;
+import uk.ac.dundee.computing.aec.InstaGeezAnA.lib.Convertors;
+import uk.ac.dundee.computing.aec.InstaGeezAnA.models.PicModel;
+import uk.ac.dundee.computing.aec.InstaGeezAnA.stores.Avatar;
+import uk.ac.dundee.computing.aec.InstaGeezAnA.stores.Comment;
+import uk.ac.dundee.computing.aec.InstaGeezAnA.stores.LoggedIn;
+import uk.ac.dundee.computing.aec.InstaGeezAnA.stores.Pic;
+import uk.ac.dundee.computing.aec.InstaGeezAnA.stores.ProfileBean;
 
 /**
  * Servlet implementation class Image
@@ -149,10 +149,10 @@ public class Image extends HttpServlet {
             pm.setCluster(cluster);
             if(comment.isEmpty())
             {
-                response.sendRedirect("/Instagrim/Images/" + args[2]);
+                response.sendRedirect("/InstaGeezAnA/Images/" + args[2]);
             }else{
                 pm.addComment(comment, picid, username);
-                response.sendRedirect("/Instagrim/Images/" + args[2]);
+                response.sendRedirect("/InstaGeezAnA/Images/" + args[2]);
             }
         }
         else if(cameFrom.equals("DeletePhoto"))
@@ -173,7 +173,7 @@ public class Image extends HttpServlet {
             }
             pm.DeletePic(username, picid);
             session.setAttribute("ProfileBean", pb);
-            response.sendRedirect("/Instagrim/Images/" + args[2]);
+            response.sendRedirect("/InstaGeezAnA/Images/" + args[2]);
         }
         else
         {
@@ -202,7 +202,7 @@ public class Image extends HttpServlet {
                     System.out.println("entered the first condition");
                     tm.insertPic(b, type, filename, username);
                     is.close();
-                    response.sendRedirect("/Instagrim/Images/" + lg.getUsername());
+                    response.sendRedirect("/InstaGeezAnA/Images/" + lg.getUsername());
                 }
                 else
                 {
@@ -215,7 +215,7 @@ public class Image extends HttpServlet {
                     pb.setAvatar(av);
                     session.setAttribute("uploadProfile", false);
                     session.setAttribute("ProfileBean", pb);
-                    response.sendRedirect("/Instagrim/Profile/" + lg.getUsername());
+                    response.sendRedirect("/InstaGeezAnA/Profile/" + lg.getUsername());
                 }
             }
      

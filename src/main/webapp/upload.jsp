@@ -8,28 +8,28 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel="stylesheet" href="/Instagrim/bootstrap/css/bootstrap.min.css"/>
-        <link rel="stylesheet" href="/Instagrim/bootstrap/css/styles.css"/>
-        <link href="/Instagrim/bootstrap/css/font-awesome.min.css" rel="stylesheet">
-        <link href="/Instagrim/bootstrap/css/animate.min.css" rel="stylesheet">
-        <link href="/Instagrim/bootstrap/css/prettyPhoto.css" rel="stylesheet">
-        <link href="/Instagrim/bootstrap/css/main.css" rel="stylesheet">
-        <link href="/Instagrim/bootstrap/css/responsive.css" rel="stylesheet">
+        <link rel="stylesheet" href="/InstaGeezAnA/bootstrap/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="/InstaGeezAnA/bootstrap/css/styles.css"/>
+        <link href="/InstaGeezAnA/bootstrap/css/font-awesome.min.css" rel="stylesheet">
+        <link href="/InstaGeezAnA/bootstrap/css/animate.min.css" rel="stylesheet">
+        <link href="/InstaGeezAnA/bootstrap/css/prettyPhoto.css" rel="stylesheet">
+        <link href="/InstaGeezAnA/bootstrap/css/main.css" rel="stylesheet">
+        <link href="/InstaGeezAnA/bootstrap/css/responsive.css" rel="stylesheet">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-        <script src="/Instagrim/bootstrap/js/bootstrap.min.js"></script>
-        <script src="/Instagrim/bootstrap/js/jquery.prettyPhoto.js"></script>
-        <script src="/Instagrim/bootstrap/js/jquery.isotope.min.js"></script>
-        <script src="/Instagrim/bootstrap/js/main.js"></script>
-        <script src="/Instagrim/bootstrap/js/wow.min.js"></script>
+        <script src="/InstaGeezAnA/bootstrap/js/bootstrap.min.js"></script>
+        <script src="/InstaGeezAnA/bootstrap/js/jquery.prettyPhoto.js"></script>
+        <script src="/InstaGeezAnA/bootstrap/js/jquery.isotope.min.js"></script>
+        <script src="/InstaGeezAnA/bootstrap/js/main.js"></script>
+        <script src="/InstaGeezAnA/bootstrap/js/wow.min.js"></script>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Instagrim</title>
+        <title>InstaGeezAnA</title>
     </head>
     <body>
-        <h1>InstaGrim ! </h1>
+        <h1>InstaGeezAnA ! </h1>
         <h2>Your world in Black and White</h2>
         <nav>
             <ul>
-                <li class="nav"><a href="/Instagrim/Images/majed">Sample Images</a></li>
+                <li class="nav"><a href="/InstaGeezAnA/Images/majed">Sample Images</a></li>
             </ul>
         </nav>
  
@@ -47,7 +47,7 @@
         </article>
         <footer>
             <ul>
-                <li class="footer"><a href="/Instagrim">Home</a></li>
+                <li class="footer"><a href="/InstaGeezAnA">Home</a></li>
             </ul>
         </footer>
     </body>

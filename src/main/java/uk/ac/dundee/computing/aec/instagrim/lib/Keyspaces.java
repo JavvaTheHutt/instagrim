@@ -1,4 +1,4 @@
-package uk.ac.dundee.computing.aec.instagrim.lib;
+package uk.ac.dundee.computing.aec.InstaGeezAnA.lib;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,8 +14,8 @@ public final class Keyspaces {
     public static void SetUpKeySpaces(Cluster c) {
         try {
             //Add some keyspaces here
-            String createkeyspace = "create keyspace if not exists instagrim  WITH replication = {'class':'SimpleStrategy', 'replication_factor':1}";
-            String CreatePicTable = "CREATE TABLE if not exists instagrim.Pics ("
+            String createkeyspace = "create keyspace if not exists InstaGeezAnA  WITH replication = {'class':'SimpleStrategy', 'replication_factor':1}";
+            String CreatePicTable = "CREATE TABLE if not exists InstaGeezAnA.Pics ("
                     + " user varchar,"
                     + " picid uuid, "
                     + " interaction_time timestamp,"
@@ -30,18 +30,18 @@ public final class Keyspaces {
                     + " name  varchar,"
                     + " PRIMARY KEY (picid)"
                     + ")";
-            String Createuserpiclist = "CREATE TABLE if not exists instagrim.userpiclist (\n"
+            String Createuserpiclist = "CREATE TABLE if not exists InstaGeezAnA.userpiclist (\n"
                     + "picid uuid,\n"
                     + "user varchar,\n"
                     + "pic_added timestamp,\n"
                     + "PRIMARY KEY (user,pic_added)\n"
                     + ") WITH CLUSTERING ORDER BY (pic_added desc);";
-            String CreateAddressType = "CREATE TYPE if not exists instagrim.address (\n"
+            String CreateAddressType = "CREATE TYPE if not exists InstaGeezAnA.address (\n"
                     + "      street text,\n"
                     + "      city text,\n"
                     + "      zip int\n"
                     + "  );";
-            String CreateUserProfile = "CREATE TABLE if not exists instagrim.userprofiles (\n"
+            String CreateUserProfile = "CREATE TABLE if not exists InstaGeezAnA.userprofiles (\n"
                     + "      login text PRIMARY KEY,\n"
                     + "      password text,\n"
                     + "      first_name text,\n"
@@ -52,7 +52,7 @@ public final class Keyspaces {
                     + "      about text\n"
                     + "  );";
             
-            String CreatePictureComments = "CREATE TABLE if not exists instagrim.piccomments (\n"
+            String CreatePictureComments = "CREATE TABLE if not exists InstaGeezAnA.piccomments (\n"
                     + "      user text,\n"
                     + "      picid uuid,\n"
                     + "      commentid uuid PRIMARY KEY,\n"
@@ -67,9 +67,9 @@ public final class Keyspaces {
                         statement);
                 ResultSet rs = session
                         .execute(boundStatement);
-                System.out.println("created instagrim ");
+                System.out.println("created InstaGeezAnA ");
             } catch (Exception et) {
-                System.out.println("Can't create instagrim " + et);
+                System.out.println("Can't create InstaGeezAnA " + et);
             }
 
             //now add some column families 

@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package uk.ac.dundee.computing.aec.instagrim.servlets;
+package uk.ac.dundee.computing.aec.InstaGeezAnA.servlets;
 
 import com.datastax.driver.core.Cluster;
 import java.io.IOException;
@@ -19,11 +19,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import uk.ac.dundee.computing.aec.instagrim.lib.CassandraHosts;
-import uk.ac.dundee.computing.aec.instagrim.models.User;
-import uk.ac.dundee.computing.aec.instagrim.stores.Avatar;
-import uk.ac.dundee.computing.aec.instagrim.stores.LoggedIn;
-import uk.ac.dundee.computing.aec.instagrim.stores.ProfileBean;
+import uk.ac.dundee.computing.aec.InstaGeezAnA.lib.CassandraHosts;
+import uk.ac.dundee.computing.aec.InstaGeezAnA.models.User;
+import uk.ac.dundee.computing.aec.InstaGeezAnA.stores.Avatar;
+import uk.ac.dundee.computing.aec.InstaGeezAnA.stores.LoggedIn;
+import uk.ac.dundee.computing.aec.InstaGeezAnA.stores.ProfileBean;
 
 /**
  *
@@ -94,9 +94,9 @@ public class Login extends HttpServlet {
                 session.setAttribute("Avatar", profile.getAvatar());
                 session.setAttribute("uploadProfile", false);
                 System.out.println("Session in servlet "+session);
-                response.sendRedirect("/Instagrim");
+                response.sendRedirect("/InstaGeezAnA");
         }else{
-            response.sendRedirect("/Instagrim/Login");
+            response.sendRedirect("/InstaGeezAnA/Login");
         }
         }
         

@@ -5,40 +5,40 @@
 --%>
 
 <%@page import="java.util.Iterator"%>
-<%@page import="uk.ac.dundee.computing.aec.instagrim.stores.Pic"%>
-<%@page import="uk.ac.dundee.computing.aec.instagrim.stores.Avatar"%>
-<%@page import="uk.ac.dundee.computing.aec.instagrim.stores.ProfileBean"%>
-<%@page import="uk.ac.dundee.computing.aec.instagrim.stores.LoggedIn"%>
+<%@page import="uk.ac.dundee.computing.aec.InstaGeezAnA.stores.Pic"%>
+<%@page import="uk.ac.dundee.computing.aec.InstaGeezAnA.stores.Avatar"%>
+<%@page import="uk.ac.dundee.computing.aec.InstaGeezAnA.stores.ProfileBean"%>
+<%@page import="uk.ac.dundee.computing.aec.InstaGeezAnA.stores.LoggedIn"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel="stylesheet" href="/Instagrim/bootstrap/css/bootstrap.min.css"/>
-        <link rel="stylesheet" href="/Instagrim/bootstrap/css/styles.css"/>
-        <link href="/Instagrim/bootstrap/css/font-awesome.min.css" rel="stylesheet">
-        <link href="/Instagrim/bootstrap/css/animate.min.css" rel="stylesheet">
-        <link href="/Instagrim/bootstrap/css/prettyPhoto.css" rel="stylesheet">
-        <link href="/Instagrim/bootstrap/css/main.css" rel="stylesheet">
-        <link href="/Instagrim/bootstrap/css/responsive.css" rel="stylesheet">
+        <link rel="stylesheet" href="/InstaGeezAnA/bootstrap/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="/InstaGeezAnA/bootstrap/css/styles.css"/>
+        <link href="/InstaGeezAnA/bootstrap/css/font-awesome.min.css" rel="stylesheet">
+        <link href="/InstaGeezAnA/bootstrap/css/animate.min.css" rel="stylesheet">
+        <link href="/InstaGeezAnA/bootstrap/css/prettyPhoto.css" rel="stylesheet">
+        <link href="/InstaGeezAnA/bootstrap/css/main.css" rel="stylesheet">
+        <link href="/InstaGeezAnA/bootstrap/css/responsive.css" rel="stylesheet">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-        <script src="/Instagrim/bootstrap/js/bootstrap.min.js"></script>
-        <script src="/Instagrim/bootstrap/js/jquery.prettyPhoto.js"></script>
-        <script src="/Instagrim/bootstrap/js/jquery.isotope.min.js"></script>
-        <script src="/Instagrim/bootstrap/js/main.js"></script>
-        <script src="/Instagrim/bootstrap/js/wow.min.js"></script>
+        <script src="/InstaGeezAnA/bootstrap/js/bootstrap.min.js"></script>
+        <script src="/InstaGeezAnA/bootstrap/js/jquery.prettyPhoto.js"></script>
+        <script src="/InstaGeezAnA/bootstrap/js/jquery.isotope.min.js"></script>
+        <script src="/InstaGeezAnA/bootstrap/js/main.js"></script>
+        <script src="/InstaGeezAnA/bootstrap/js/wow.min.js"></script>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <% LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");
            session.setAttribute("username", lg.getUsername());
            ProfileBean profile = (ProfileBean) session.getAttribute("ProfileBean");
         %>
-        <title>Instagrim</title>
+        <title>InstaGeezAnA</title>
     </head>
     <body>
         <div id="navbar" class="navbar navbar-inverse navbar-static-top">
             <div class="container">
               <!-- Brand and toggle get grouped for better mobile display -->
               <div id="navHead" class="navbar-header">
-                <a id="brand" class="navbar-brand" href="/Instagrim/">Instagrim</a>
+                <a id="brand" class="navbar-brand" href="/InstaGeezAnA/">InstaGeezAnA</a>
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                   <span class="sr-only">Toggle navigation</span>
                   <span class="icon-bar"></span>
@@ -52,9 +52,9 @@
               <!-- Collect the nav links, forms, and other content for toggling -->
               <div class="collapse navbar-collapse">
                       <ul class="nav navbar-nav">
-                        <li><a href="/Instagrim/Upload">Upload</a></li>
-                        <li><a href="/Instagrim/Images/<%=lg.getUsername()%>">Images</a></li>
-                        <li class="active"><a href="/Instagrim/Profile/<%=lg.getUsername()%>">Profile</a></li>
+                        <li><a href="/InstaGeezAnA/Upload">Upload</a></li>
+                        <li><a href="/InstaGeezAnA/Images/<%=lg.getUsername()%>">Images</a></li>
+                        <li class="active"><a href="/InstaGeezAnA/Profile/<%=lg.getUsername()%>">Profile</a></li>
                       </ul>
                       <ul id="rightnav" class="nav navbar-nav navbar-right">
                         <li>
@@ -67,7 +67,7 @@
                                 </div>
                             </form>
                         </li>
-                        <li><a href="/Instagrim/Logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+                        <li><a href="/InstaGeezAnA/Logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
                       </ul>
               </div><!-- /.navbar-collapse -->
             </div><!-- /.container-fluid -->
@@ -81,10 +81,10 @@
                                 <div id="profilePic">
                                     <% if(profile.getAvatar() != null)
                                         {%>
-                                            <li id="avatar"><a href="/Instagrim/Image/<%=profile.getAvatar().getSUUID()%>"><img id="avatarImg" class="img-responsive" src="/Instagrim/Image/<%=profile.getAvatar().getSUUID()%> "></a><a id="uploadText" href="/Instagrim/UploadProfile">Change Avatar <span class="glyphicon glyphicon-cloud-upload"></span></a></li><br/>
+                                            <li id="avatar"><a href="/InstaGeezAnA/Image/<%=profile.getAvatar().getSUUID()%>"><img id="avatarImg" class="img-responsive" src="/InstaGeezAnA/Image/<%=profile.getAvatar().getSUUID()%> "></a><a id="uploadText" href="/InstaGeezAnA/UploadProfile">Change Avatar <span class="glyphicon glyphicon-cloud-upload"></span></a></li><br/>
                                     <% }else{ 
                                     %>
-                                            <li id="avatar"><img class="img-responsive" id="avatarImg" src="/Instagrim/images/Vendetta.jpg"><a id="uploadText" href="/Instagrim/UploadProfile">Change Avatar <span class="glyphicon glyphicon-cloud-upload"></span></a></li>
+                                            <li id="avatar"><img class="img-responsive" id="avatarImg" src="/InstaGeezAnA/images/Vendetta.jpg"><a id="uploadText" href="/InstaGeezAnA/UploadProfile">Change Avatar <span class="glyphicon glyphicon-cloud-upload"></span></a></li>
                                     <%}%>
                                 </div>
                             </ul>
@@ -108,7 +108,7 @@
                             <p><%=profile.getAbout()%></p>
                             <%}%>
                             <%if(profile.getUsername().equals(lg.getUsername())){%>
-                            <a href="/Instagrim/Update/<%=lg.getUsername()%>">update profile</a>
+                            <a href="/InstaGeezAnA/Update/<%=lg.getUsername()%>">update profile</a>
                             <%}%>
                         </div>
                     </div>
@@ -135,7 +135,7 @@
 
                         %>
                         <div class="col-md-4">
-                        <a href="/Instagrim/Image/<%=p.getSUUID()%>" ><img id="userImage" src="/Instagrim/Image/<%=p.getSUUID()%>"></a>
+                        <a href="/InstaGeezAnA/Image/<%=p.getSUUID()%>" ><img id="userImage" src="/InstaGeezAnA/Image/<%=p.getSUUID()%>"></a>
                         </div>
                         <%}}%>   
                 </div>

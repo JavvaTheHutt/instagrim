@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package uk.ac.dundee.computing.aec.instagrim.servlets;
+package uk.ac.dundee.computing.aec.InstaGeezAnA.servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -15,8 +15,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import uk.ac.dundee.computing.aec.instagrim.lib.CassandraHosts;
-import uk.ac.dundee.computing.aec.instagrim.stores.LoggedIn;
+import uk.ac.dundee.computing.aec.InstaGeezAnA.lib.CassandraHosts;
+import uk.ac.dundee.computing.aec.InstaGeezAnA.stores.LoggedIn;
 
 /**
  *
@@ -33,7 +33,7 @@ public class Logout extends HttpServlet {
                 session.setAttribute("DisplayMessage", message);
                 //request.getRequestDispatcher("login.jsp").forward(request, response);
                 session.setAttribute("LoggedIn", null);
-                response.sendRedirect("/Instagrim");
+                response.sendRedirect("/InstaGeezAnA");
     }
 
     /**

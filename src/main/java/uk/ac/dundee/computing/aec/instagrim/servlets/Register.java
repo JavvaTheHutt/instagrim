@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package uk.ac.dundee.computing.aec.instagrim.servlets;
+package uk.ac.dundee.computing.aec.InstaGeezAnA.servlets;
 
 import com.datastax.driver.core.Cluster;
 import com.datastax.driver.core.Session;
@@ -18,9 +18,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import uk.ac.dundee.computing.aec.instagrim.lib.CassandraHosts;
-import uk.ac.dundee.computing.aec.instagrim.models.User;
-import uk.ac.dundee.computing.aec.instagrim.stores.*;
+import uk.ac.dundee.computing.aec.InstaGeezAnA.lib.CassandraHosts;
+import uk.ac.dundee.computing.aec.InstaGeezAnA.models.User;
+import uk.ac.dundee.computing.aec.InstaGeezAnA.stores.*;
 
 /**
  *
@@ -74,7 +74,7 @@ public class Register extends HttpServlet {
         //makes sure that the fields are not emtpy to avoid database registering a blank user
         if(password.isEmpty() || username.isEmpty() || firstname.isEmpty() || lastname.isEmpty() || email.isEmpty() || street.isEmpty() || city.isEmpty() || about.isEmpty())
         {
-            response.sendRedirect("/Instagrim/Register");
+            response.sendRedirect("/InstaGeezAnA/Register");
         }
         else
         {
@@ -90,7 +90,7 @@ public class Register extends HttpServlet {
                 rd.forward(request, response); 
             }else{
                 System.out.println(result);
-                response.sendRedirect("/Instagrim/Register");
+                response.sendRedirect("/InstaGeezAnA/Register");
             }
         }
         

@@ -7,24 +7,24 @@
 
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="uk.ac.dundee.computing.aec.instagrim.stores.*" %>
+<%@page import="uk.ac.dundee.computing.aec.InstaGeezAnA.stores.*" %>
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Instagrim</title>
-        <link rel="stylesheet" href="/Instagrim/bootstrap/css/bootstrap.min.css"/>
-        <link rel="stylesheet" href="/Instagrim/bootstrap/css/styles.css"/>
-        <link href="/Instagrim/bootstrap/css/font-awesome.min.css" rel="stylesheet">
-        <link href="/Instagrim/bootstrap/css/animate.min.css" rel="stylesheet">
-        <link href="/Instagrim/bootstrap/css/prettyPhoto.css" rel="stylesheet">
-        <link href="/Instagrim/bootstrap/css/main.css" rel="stylesheet">
-        <link href="/Instagrim/bootstrap/css/responsive.css" rel="stylesheet">
+        <title>InstaGeezAnA</title>
+        <link rel="stylesheet" href="/InstaGeezAnA/bootstrap/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="/InstaGeezAnA/bootstrap/css/styles.css"/>
+        <link href="/InstaGeezAnA/bootstrap/css/font-awesome.min.css" rel="stylesheet">
+        <link href="/InstaGeezAnA/bootstrap/css/animate.min.css" rel="stylesheet">
+        <link href="/InstaGeezAnA/bootstrap/css/prettyPhoto.css" rel="stylesheet">
+        <link href="/InstaGeezAnA/bootstrap/css/main.css" rel="stylesheet">
+        <link href="/InstaGeezAnA/bootstrap/css/responsive.css" rel="stylesheet">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-        <script src="/Instagrim/bootstrap/js/bootstrap.min.js"></script>
-        <script src="/Instagrim/bootstrap/js/jquery.prettyPhoto.js"></script>
-        <script src="/Instagrim/bootstrap/js/jquery.isotope.min.js"></script>
-        <script src="/Instagrim/bootstrap/js/main.js"></script>
-        <script src="/Instagrim/bootstrap/js/wow.min.js"></script>
+        <script src="/InstaGeezAnA/bootstrap/js/bootstrap.min.js"></script>
+        <script src="/InstaGeezAnA/bootstrap/js/jquery.prettyPhoto.js"></script>
+        <script src="/InstaGeezAnA/bootstrap/js/jquery.isotope.min.js"></script>
+        <script src="/InstaGeezAnA/bootstrap/js/main.js"></script>
+        <script src="/InstaGeezAnA/bootstrap/js/wow.min.js"></script>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     </head>
     <body>        
@@ -32,7 +32,7 @@
                     <div class="container">
                       <!-- Brand and toggle get grouped for better mobile display -->
                       <div id="navHead" class="navbar-header">
-                        <a id="brand" class="navbar-brand" href="/Instagrim/">Instagrim</a>
+                        <a id="brand" class="navbar-brand" href="/InstaGeezAnA/">InstaGeezAnA</a>
                         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                           <span class="sr-only">Toggle navigation</span>
                           <span class="icon-bar"></span>
@@ -54,9 +54,9 @@
                                   {
                               %>
                               <ul class="nav navbar-nav">
-                                <li><a href="/Instagrim/Upload">Upload</a></li>
-                                <li><a href="/Instagrim/Images/<%=UserName%>">Images</a></li>
-                                <li><a href="/Instagrim/Profile/<%=UserName%>">Profile</a></li>
+                                <li><a href="/InstaGeezAnA/Upload">Upload</a></li>
+                                <li><a href="/InstaGeezAnA/Images/<%=UserName%>">Images</a></li>
+                                <li><a href="/InstaGeezAnA/Profile/<%=UserName%>">Profile</a></li>
                               </ul>
                               <ul id="rightnav" class="nav navbar-nav navbar-right">
                                 <li>
@@ -69,14 +69,14 @@
                                         </div>
                                     </form>
                                 </li>
-                                <li><a href="/Instagrim/Logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+                                <li><a href="/InstaGeezAnA/Logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
                               </ul>
                               <%}
                               }else{
                               %>
                                 <ul id="rightnav" class="nav navbar-nav navbar-right">
-                                    <li><a href="/Instagrim/Register"><span class="glyphicon glyphicon-user"></span> SignUp</a></li>
-                                    <li><a href="/Instagrim/Login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                                    <li><a href="/InstaGeezAnA/Register"><span class="glyphicon glyphicon-user"></span> SignUp</a></li>
+                                    <li><a href="/InstaGeezAnA/Login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
                                 </ul>
                               <%
                                   }
@@ -87,7 +87,7 @@
                 <div id='header' class="jumbotron">
                     <div id="jumbotronContainer" class='container'>
                         <h1 id='WelcomeText'>
-                            Instagrim
+                            InstaGeezAnA
                         </h1>
                         <br>
                             <h2 id='TaglineText'>
@@ -97,7 +97,7 @@
                               if(lg == null)
                               {
                               %>
-                        <a href="/Instagrim/Register"><button id="animBtn" type="button" class="btn btn-transparent wow slideInLeft">Sign Up</button></a>
+                        <a href="/InstaGeezAnA/Register"><button id="animBtn" type="button" class="btn btn-transparent wow slideInLeft">Sign Up</button></a>
                         <%}%>
                     </div>
                 </div>
